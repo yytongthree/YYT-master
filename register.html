@@ -1,0 +1,55 @@
+<!doctype html> 
+<html> 
+<head> 
+<meta charset="UTF-8"> 
+<link rel="icon" href="mainpages/images/icon/favicon.ico" type="mainpages/x-icon">
+<link rel="stylesheet" type="text/css" href="mainpages/css/style.css" />
+<script src="mainpages/js/jquery.js"></script>
+<script src="mainpages/js/public.js"></script>
+<script src="mainpages/js/customScrollbar.min.js"></script>
+<script src="mainpages/js/login.js"></script>
+<title>注册系统</title> 
+<style type="text/css"> 
+form-groups { 
+  text-align: center;
+  text-align: left; 
+} 
+</style> 
+</head> 
+<body class="login-page">
+	<section class="login-contain">
+		<header>
+			<h1>用户注册</h1>
+			<p>user register</p>
+		</header>
+		<div class="form-content">
+			<ul>
+				<li>
+  <p align="center"><font color="#FF0000">以下内容请如实填写，其中带有*号的栏目是必须填写的</font>
+				</li>
+					<div class="form-groups">
+  					<form action="register.php" method="post" name="form_register"> 
+   					 <p align="center">用户名<input type="text" name="name" id="name">*</p>
+					<p align="center">密码<input type="password" name="password" id="password">*</p>
+					<p align="center">确认密码<input type="password" name="assertpassword" id="assertpassword">*</p>
+					<p align="center">真实姓名<input type="text" name="truename" id="truename">*</p></li>
+					<p align="center">性别<input type="Radio" name="sex" value="男" id="sex" checked>男
+   		  <input type="Radio" name="sex" value="女" id="sex">女*</p></li>
+					<p align="center">年龄<input type="text" name="age" id="age">*</p></li>
+					<p align="center">电话<input type="text" name="num" id="num">* </p></li>
+					<p align="center">地址<input type="text" name="addr" id="addr"></p></li>
+					<p align="center">用户类型<input type="Radio" name="authority" value="1" id="authority" checked>非签约用户
+   		  <input type="Radio" name="authority" value="2" id="authority">签约用户
+          <input type="Radio" name="authority" value="3" id="authority">医生*</p></li>
+          </div>
+                   
+                <p align="center">
+					<button class="btn btn-lg" id="zc">注册</button>
+					</form>
+					<a  href="index.html">
+					<button class="btn btn-lg">取消</button></a>
+                </ul>
+		</div>
+	</section>
+</body> 
+</html> 
