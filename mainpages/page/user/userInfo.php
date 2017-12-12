@@ -31,14 +31,16 @@
 						die('Could not connect: ' . mysqli_error());
 					}
 	
-					$query = "SELECT authority FROM register_info WHERE name='{$_SESSION['username']}'"; 
+					$query = "SELECT truename,num,authority FROM register_info WHERE name='{$_SESSION['username']}'"; 
      				//执行SQL语句  
      				$result = mysqli_query($conn,$query) or die("Error in query: $query. ".mysqli_error());  
      				//显示返回的记录集行数  
      				if(mysqli_num_rows($result)>0){  
          			//如果返回的数据集行数大于0，则开始以表格的形式显示   
-         				while($row=mysqli_fetch_row($result)){ 
-		 	 				$authority=$row[0];  
+         				while($row=mysqli_fetch_array($result)){ 
+							$truename=$row['truename'];
+							$num=$row['num'];
+							$authority=$row['authority'];  
          				}    
      				}
 					switch($authority){
@@ -68,7 +70,7 @@
 			<div class="layui-form-item">
 			    <label class="layui-form-label">真实姓名</label>
 			    <div class="layui-input-block">
-			    	<input type="text" value="" placeholder="请输入真实姓名" lay-verify="required" id="truename" class="layui-input">
+			    	<input type="text" value="<?php echo $truename;?>" placeholder="请输入真实姓名" lay-verify="required" id="truename" class="layui-input">
 			    </div>
 			</div>
 			<div class="layui-form-item" pane="">
@@ -82,7 +84,7 @@
 			<div class="layui-form-item">
 			    <label class="layui-form-label">手机号码</label>
 			    <div class="layui-input-block">
-			    	<input type="tel" value="" placeholder="请输入手机号码" id="tel" lay-verify="required|phone" class="layui-input">
+			    	<input type="tel" value="<?php echo $num;?>" placeholder="请输入手机号码" id="tel" lay-verify="required|phone" class="layui-input">
 			    </div>
 			</div>
 			<div class="layui-form-item">

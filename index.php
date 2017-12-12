@@ -32,19 +32,48 @@
 					<div class="form-group">
 					<form action="enter.php" method="post" >
 						<label class="control-label">用户账号：</label>
-						<input type="text" placeholder="用户账号..." name="adminName" class="form-control form-underlined" id="adminName"/>
+                        <?php
+							if(isset($_COOKIE["name"])){
+						?>
+                        		<input type="text" value="<?php echo $_COOKIE["name"];?>" placeholder="用户账号..." name="adminName" class="form-control form-underlined" id="adminName"/>
+                        <?php
+							}else{
+						?>
+								<input type="text" placeholder="用户账号..." name="adminName" class="form-control form-underlined" id="adminName"/>
+                        <?php } ?>
 					</div>
 				</li>
 				<li>
 					<div class="form-group">
 						<label class="control-label">用户密码：</label>
+                        <?php
+							if(isset($_COOKIE["password"])){
+						?>
+                        <input type="password" value="<?php echo $_COOKIE["password"];?>" placeholder="用户密码..." name="adminPwd" class="form-control form-underlined" id="adminPwd"/>
+                         <?php
+							}else{
+						?>
 						<input type="password" placeholder="用户密码..." name="adminPwd" class="form-control form-underlined" id="adminPwd"/>
+                        <?php } ?>
 					</div>
 				</li>
 				<li>
+                <p align="center">
 					<label class="check-box">
-						<input type="checkbox" name="remember"/>
-						<span>记住账号密码</span>
+                    <?php
+							if($_COOKIE['remember'] == 1){
+					?>
+                        		<input type="checkbox" name="remember" value="1" checked>
+					<?php 
+								}else{
+					?>
+                        <input type="checkbox" name="remember" value="1"/>
+                     <?php } ?>
+						<span>记住密码</span>
+					</label>
+                    <label class="check-box">
+						<input type="checkbox" name="remember" value="2"/>
+						<span>自动登录</span>
 					</label>
 				</li>
 				<li>
@@ -53,6 +82,10 @@
 					</form>
 					<a  href="register.html">
 					<button class="btn btn-lg">立即注册</button></a>
+				</li>
+                <li>
+                <p align="center">
+					<a  href="register.html">忘记密码？</a>
 				</li>
 				<li>
 					<p class="btm-info">©Copyright 2006-2010 <a href="#" target="_blank" title="DeathGhost">DeathGhost.cn</a></p>

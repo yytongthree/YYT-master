@@ -13,6 +13,7 @@
 	$sex=$_REQUEST["sex"];
 	$age=$_REQUEST["age"];
 	$num=$_REQUEST["num"];
+	$email=$_REQUEST["email"];
 	$addr=$_REQUEST["addr"];
 	$authority=$_REQUEST["authority"];
   
@@ -40,13 +41,13 @@
   				</script>
   <?php
 				}else{
-					$sql="INSERT INTO register_info (name,password,truename,sex,age,num,addr,authority) VALUES('{$name}','{$password}','{$truename}','{$sex}','{$age}','{$num}','{$addr}','{$authority}')";
+					$sql="INSERT INTO register_info (name,password,truename,sex,age,num,email,addr,authority) VALUES('{$name}','{$password}','{$truename}','{$sex}','{$age}','{$num}','{$email}','{$addr}','{$authority}')";
    					if(mysqli_query($conn,$sql))
    					{
 ?>
 					<script type="text/javascript"> 
     				alert("注册成功"); 
-    				window.location.href="index.html"; 
+    				window.location.href="index.php"; 
  					</script>
 <?php
 					} else {
@@ -78,14 +79,14 @@
  					</script>
                     <?php
 				}else{
-					$sql="INSERT INTO register_info (name,password,truename,sex,age,num,addr,authority) VALUES('{$name}','{$password}','{$truename}','{$sex}','{$age}','{$num}','{$addr}','{$authority}')";
+					$sql="INSERT INTO register_info (name,password,truename,sex,age,num,email,addr,authority) VALUES('{$name}','{$password}','{$truename}','{$sex}','{$age}','{$num}','{$email}','{$addr}','{$authority}')";
 					$sql2="UPDATE inha_info SET sex='$sex',age='$age',num='$num',addr='$addr',nickname='$name' WHERE name='$truename'";
    			if(mysqli_query($conn,$sql)&&mysqli_query($conn,$sql2))
    					{
 ?>
 					<script type="text/javascript"> 
     				alert("注册成功"); 
-    				window.location.href="index.html"; 
+    				window.location.href="index.php"; 
  					</script>
 <?php
 					} else {
@@ -117,14 +118,14 @@
  					</script>
 <?php
 				}else{
-					$sql="INSERT INTO register_info (name,password,truename,sex,age,num,addr,authority) VALUES('{$name}','{$password}','{$truename}','{$sex}','{$age}','{$num}','{$addr}','{$authority}')";
+					$sql="INSERT INTO register_info (name,password,truename,sex,age,num,email,addr,authority) VALUES('{$name}','{$password}','{$truename}','{$sex}','{$age}','{$num}','{$email}','{$addr}','{$authority}')";
 					$sql2="UPDATE docter_info SET sex='$sex',age='$age',num='$num',nickname='$name' WHERE name='$truename'";
    					if(mysqli_query($conn,$sql)&&mysqli_query($conn,$sql2))
    					{
 ?>
 					<script type="text/javascript"> 
     				alert("注册成功"); 
-    				window.location.href="index.html"; 
+    				window.location.href="index.php"; 
  					</script>
 <?php
 					} else {

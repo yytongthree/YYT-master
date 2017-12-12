@@ -9,6 +9,7 @@
 <?php
     $username=$_REQUEST["adminName"];//获取html中的用户名（通过post请求） 
     $password=$_REQUEST["adminPwd"];//获取html中的密码（通过post请求） 
+	$remember = $_REQUEST['remember'];
 
 	$conn=mysqli_connect("localhost","root","wenny673","yyt_info"); 
 	// 检查连接 
@@ -30,7 +31,7 @@
   ?> 
   <script type="text/javascript"> 
     alert("用户名不存在"); 
-    window.location.href="index.html"; 
+    window.location.href="index.php"; 
   </script> 
 <?php 
     } 
@@ -39,13 +40,24 @@
   ?> 
   <script type="text/javascript"> 
     alert("密码错误"); 
-    window.location.href="index.html"; 
+    window.location.href="index.php"; 
   </script> 
  <?php 
       } 
       else { 
         $_SESSION['username']=$username; 
         $_SESSION['code']=mt_rand(0, 100000);//给session附一个随机值，防止用户直接通过调用界面访问index.php
+		$remember = $_POST['remember'];
+		if($remember == 1){
+			setcookie('name',$username,time()+3600);
+			setcookie('password',$password,time()+3600);
+			setcookie('remember',$remember,time()+3600);
+		}else{
+			setcookie('name',$username,time()-3600);
+			setcookie('password',$password,time()-3600);
+			setcookie('remember',$remember,time()-3600);
+		}
+
 		switch($dbauthority)
 		{
 			case "1":{ 
