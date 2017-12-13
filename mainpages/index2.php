@@ -65,6 +65,17 @@
 			    </div>
 			    <!-- 顶部右侧菜单 -->
 			    <ul class="layui-nav top_menu">
+                <form action="../exit.php" method="post" >
+                <li class="layui-nav-item" pc>
+                <?php
+                   if($_COOKIE['remember2'] == 1){
+				?>
+                		<input type="checkbox" name="autologin" title="自动登录" lay-skin="primary" value="1" checked>
+                        <cite>自动登录</cite>
+                <?php
+				   }
+				?>
+                </li>
 			    	<li class="layui-nav-item showNotice" id="showNotice" pc>
 						<a href="javascript:;"><i class="iconfont icon-gonggao"></i><cite>系统公告</cite></a>
 					</li>
@@ -85,7 +96,8 @@
 						<dl class="layui-nav-child">
 							<dd><a href="javascript:;" data-url="page/user/userInfo.php"><i class="iconfont icon-zhanghu" data-icon="icon-zhanghu"></i><cite>个人资料</cite></a></dd>
 							<dd><a href="javascript:;" data-url="page/user/changePwd.php"><i class="iconfont icon-shezhi1" data-icon="icon-shezhi1"></i><cite>修改密码</cite></a></dd>
-							<dd><a href="../exit.php"><i class="iconfont icon-loginout"></i><cite>退出</cite></a></dd>
+							<dd><a href="javascript:;"><button class="layui-btn-transparent"><i class="iconfont icon-loginout"></i><cite>退出</cite></button></a></dd>
+                         </form>
 						</dl>
 					</li>
 				</ul>
@@ -114,7 +126,7 @@
 		</div>
 		<!-- 底部 -->
 		<div class="layui-footer footer">
-			<p>copyright @2017 请叫我马哥 更多模板：<a href="http://www.mycodes.net/" target="_blank">源码之家</a>　　<a onclick="donation()" class="layui-btn layui-btn-danger l·ayui-btn-small">捐赠作者</a></p>
+			<p>copyright @2017 请叫我马哥 更多模板：<a href="http://www.mycodes.net/" target="_blank">源码之家</a>　　<a onclick="donation()" class="layui-btn layui-btn-danger layui-btn-small">捐赠作者</a></p>
 		</div>
 	</div>
 

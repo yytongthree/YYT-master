@@ -61,18 +61,29 @@
                 <p align="center">
 					<label class="check-box">
                     <?php
-							if($_COOKIE['remember'] == 1){
+							if($_COOKIE['remember1'] == 1){
 					?>
-                        		<input type="checkbox" name="remember" value="1" checked>
+                        		<input type="checkbox" name="remember1" value="1" checked>
 					<?php 
 								}else{
 					?>
-                        <input type="checkbox" name="remember" value="1"/>
+                        <input type="checkbox" name="remember1" value="1"/>
                      <?php } ?>
 						<span>记住密码</span>
 					</label>
                     <label class="check-box">
-						<input type="checkbox" name="remember" value="2"/>
+                    <?php
+							if($_COOKIE['remember2'] == 1){
+					?>
+                        		<input type="checkbox" name="remember2" value="1" checked>
+                                <script type="text/javascript"> 
+									window.location.href="enter.php";
+  								</script> 
+					<?php 
+								}else{
+					?>
+						<input type="checkbox" name="remember2" value="1"/>
+                         <?php } ?>
 						<span>自动登录</span>
 					</label>
 				</li>

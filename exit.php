@@ -7,8 +7,11 @@
 </head> 
 <body> 
 <?php
-session_destroy (); 
-
+	$autologin=$_REQUEST['autologin'];
+	if($autologin==0){
+		setcookie('remember2',1,time()-3600);
+	}
+	session_destroy ();
 ?> 
 <script type="text/javascript"> 
  window.location.href="index.php"; 

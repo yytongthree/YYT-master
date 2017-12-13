@@ -7,9 +7,17 @@
 </head> 
 <body> 
 <?php
-    $username=$_REQUEST["adminName"];//获取html中的用户名（通过post请求） 
-    $password=$_REQUEST["adminPwd"];//获取html中的密码（通过post请求） 
-	$remember = $_REQUEST['remember'];
+	if($_COOKIE['remember2'] == 1){
+		$username=$_COOKIE["name"];//获取html中的用户名（通过post请求） 
+    	$password=$_COOKIE["password"];//获取html中的密码（通过post请求） 
+		$remember1 = $_COOKIE['remember1'];
+		$remember2 = $_COOKIE['remember2'];
+	}else{
+   		$username=$_REQUEST["adminName"];//获取html中的用户名（通过post请求） 
+    	$password=$_REQUEST["adminPwd"];//获取html中的密码（通过post请求） 
+		$remember1 = $_REQUEST['remember1'];
+		$remember2 = $_REQUEST['remember2'];
+	}
 
 	$conn=mysqli_connect("localhost","root","wenny673","yyt_info"); 
 	// 检查连接 
@@ -47,15 +55,19 @@
       else { 
         $_SESSION['username']=$username; 
         $_SESSION['code']=mt_rand(0, 100000);//给session附一个随机值，防止用户直接通过调用界面访问index.php
-		$remember = $_POST['remember'];
-		if($remember == 1){
-			setcookie('name',$username,time()+3600);
-			setcookie('password',$password,time()+3600);
-			setcookie('remember',$remember,time()+3600);
+		if($remember1 == 1){
+			setcookie('name',$username,time()+3600*24*7);
+			setcookie('password',$password,time()+3600*24*7);
+			setcookie('remember1',$remember1,time()+3600*24*7);
 		}else{
 			setcookie('name',$username,time()-3600);
 			setcookie('password',$password,time()-3600);
-			setcookie('remember',$remember,time()-3600);
+			setcookie('remember1',$remember1,time()-3600);
+		}
+		if($remember2 == 1){
+			setcookie('remember2',$remember2,time()+3600*24*7);
+		}else{
+			setcookie('remember2',$remember2,time()-3600);
 		}
 
 		switch($dbauthority)
