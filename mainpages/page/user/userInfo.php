@@ -39,6 +39,7 @@
          			//如果返回的数据集行数大于0，则开始以表格的形式显示   
          				while($row=mysqli_fetch_array($result)){ 
 							$truename=$row['truename'];
+							$sex=$row['sex'];
 							$num=$row['num'];
 							$authority=$row['authority']; 
 							$question1=$row['question1']; 
@@ -73,15 +74,35 @@
 			<div class="layui-form-item">
 			    <label class="layui-form-label">真实姓名</label>
 			    <div class="layui-input-block">
-			    	<input type="text" value="<?php echo $truename;?>" placeholder="请输入真实姓名" lay-verify="required" id="truename" class="layui-input">
+			    	<input type="text" value="<?php echo $truename;?>" disabled placeholder="请输入真实姓名" lay-verify="required" id="truename" class="layui-input layui-disabled">
 			    </div>
 			</div>
 			<div class="layui-form-item" pane="">
 			    <label class="layui-form-label">性别</label>
 			    <div class="layui-input-block">
-			    	<input type="radio" name="sex" value="男" title="男" checked="">
-	     			<input type="radio" name="sex" value="女" title="女">
-	     			<input type="radio" name="sex" value="保密" title="保密">
+                <?php
+					if($sex=="男"){
+				?>
+			    		<input type="radio" name="sex" value="男" title="男" checked="">
+	     				<input type="radio" name="sex" value="女" title="女">
+	     				<input type="radio" name="sex" value="保密" title="保密">
+                 <?php
+					}else{
+						if($sex=="女"){
+				?>
+                            <input type="radio" name="sex" value="男" title="男">
+	     					<input type="radio" name="sex" value="女" title="女" checked="">
+	     					<input type="radio" name="sex" value="保密" title="保密">
+                <?php
+						}else{
+				?>
+                            <input type="radio" name="sex" value="男" title="男">
+	     					<input type="radio" name="sex" value="女" title="女">
+	     					<input type="radio" name="sex" value="保密" title="保密" checked="">
+                <?php
+						}
+					}
+				?>
 			    </div>
 			</div>
 			<div class="layui-form-item">
@@ -91,9 +112,9 @@
 			    </div>
 			</div>
 			<div class="layui-form-item">
-			    <label class="layui-form-label">出生年月</label>
+			    <label class="layui-form-label">出生日期</label>
 			    <div class="layui-input-block">
-			    	<input type="text" value="" placeholder="请输入出生年月" lay-verify="required|date" onclick="layui.laydate({elem: this,max: laydate.now()})" class="layui-input">
+			    	<input type="text" value="" placeholder="请输入出生日期" lay-verify="required|date" onclick="layui.laydate({elem: this,max: laydate.now()})" class="layui-input">
 			    </div>
 			</div>
 			<div class="layui-form-item">
@@ -148,6 +169,6 @@
 	</form>
 	<script type="text/javascript" src="../../layui/layui.js"></script>
 	<script type="text/javascript" src="address.js"></script>
-	<script type="text/javascript" src="user1.js"></script>
+	<script type="text/javascript" src="user.js"></script>
 </body>
 </html>

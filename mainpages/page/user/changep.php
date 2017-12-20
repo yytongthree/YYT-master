@@ -11,11 +11,10 @@
 	$sql = "UPDATE register_info SET password='$newpwd' WHERE name='{$_SESSION['username']}'"; 
      //执行SQL语句  
 	if(mysqli_query($conn,$sql)){
-		echo $newpwd;
+		echo 1;
 	}else {
 		echo "0";
 	}
-     //释放记录集所占用的内存  
-    mysqli_free_result($result);  
+     //释放记录集所占用的内存   
 	mysqli_close($conn);
 	}
