@@ -18,7 +18,6 @@
 		$remember1 = $_REQUEST['remember1'];
 		$remember2 = $_REQUEST['remember2'];
 	}
-	$password1=md5($password);
 
 	$conn=mysqli_connect("localhost","root","wenny673","yyt_info"); 
 	// 检查连接 
@@ -45,7 +44,7 @@
 <?php 
     } 
     else { 
-      if ($dbpassword!=$password1){//当对应密码不对时跳回login.html界面 
+      if ($dbpassword!=$password){//当对应密码不对时跳回login.html界面 
   ?> 
   <script type="text/javascript"> 
     alert("密码错误"); 

@@ -31,7 +31,7 @@
 						die('Could not connect: ' . mysqli_error());
 					}
 	
-					$query = "SELECT * FROM register_info WHERE name='{$_SESSION['username']}'"; 
+					$query = "SELECT truename,num,authority FROM register_info WHERE name='{$_SESSION['username']}'"; 
      				//执行SQL语句  
      				$result = mysqli_query($conn,$query) or die("Error in query: $query. ".mysqli_error());  
      				//显示返回的记录集行数  
@@ -41,10 +41,7 @@
 							$truename=$row['truename'];
 							$sex=$row['sex'];
 							$num=$row['num'];
-							$authority=$row['authority']; 
-							$question1=$row['question1']; 
-							$question2=$row['question2']; 
-							$question3=$row['question3']; 
+							$authority=$row['authority'];  
          				}    
      				}
 					switch($authority){
@@ -152,13 +149,6 @@
 			<input type="file" name="dddd" class="layui-upload-file" lay-title="掐指一算，我要换一个头像了">
 			<p>由于是纯静态页面，所以只能显示一张随机的图片</p>
 			<img src="" class="layui-circle" id="userFace">
-            <?php
-				if($question1==''&&$question2==''&&$question3==''){
-			?>
-                    <p><a href="pass_ques_set.html" class="layui-btn layui-btn-danger">一个密保问题都没有！太危险啦！点我设置！</a></p>
-            <?php
-				}
-			?>
 		</div>
 		<div class="layui-form-item" style="margin-left: 5%;">
 		    <div class="layui-input-block">

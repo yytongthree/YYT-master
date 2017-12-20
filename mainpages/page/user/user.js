@@ -36,18 +36,9 @@ layui.config({
         //添加验证规则
         form.verify({
             oldPwd : function(value, item){
-                $.ajax({
-					url:"md5.php?action=ok",
-					type:'POST',
-					data:'value='+value,
-					async:true,
-					success: function(data){
-						value=data;
-						 if(value != pwd){
-                    		return "密码错误，请重新输入！";
-                		}
-					}
-				})           
+                if(value != pwd){
+                    return "密码错误，请重新输入！";
+                }
             },
             newPwd : function(value, item){
                 if(value.length < 6){

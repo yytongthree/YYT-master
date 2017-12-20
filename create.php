@@ -18,14 +18,7 @@
 		email text not null,
 		addr varchar(50),
 		authority varchar(1),
-		picture blob,
-		getpasstime int(10),
-		question1 text,
-		question2 text,
-		question3 text,
-		answer1 text,
-		answer2 text,
-		answer3 text
+		picture blob
 	)";
 	if(mysqli_query($conn,$sql))
    {

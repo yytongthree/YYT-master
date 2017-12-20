@@ -7,7 +7,7 @@
 	{
 		die('Could not connect: ' . mysqli_error());
 	}
-	$newpwd=md5($newpwd);
+	
 	$sql = "UPDATE register_info SET password='$newpwd' WHERE name='{$_SESSION['username']}'"; 
      //执行SQL语句  
 	if(mysqli_query($conn,$sql)){
