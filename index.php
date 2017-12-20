@@ -17,8 +17,8 @@
 <link rel="stylesheet" type="text/css" href="mainpages/css/style.css" />
 <script src="mainpages/js/jquery.js"></script>
 <script src="mainpages/js/public.js"></script>
-<script src="mainpages/js/customScrollbar.min.js"></script>
-<script src="mainpages/js/login.js"></script>
+<script src="mainpages/js/plug-ins/customScrollbar.min.js"></script>
+<script src="mainpages/js/pages/login.js"></script>
 </head>
 <body class="login-page">
 	<section class="login-contain">
@@ -96,7 +96,7 @@
 				</li>
                 <li>
                 <p align="center">
-					<a  href="register.html">忘记密码？</a>
+					<a href="mainpages/page/find_password/findpwd_way.php">忘记密码？</a>
 				</li>
 				<li>
 					<p class="btm-info">©Copyright 2006-2010 <a href="#" target="_blank" title="DeathGhost">DeathGhost.cn</a></p>
