@@ -17,11 +17,22 @@
 	<link rel="stylesheet" href="css/main.css" media="all" />
 </head>
 <body class="main_body">
+<?php
+	if(!$_SESSION['username']){
+?>
+		<script type="text/javascript"> 
+			window.location.href="../index.php";
+ 		</script>
+<?php
+	}
+?>
 	<div class="layui-layout layui-layout-admin">
 		<!-- 顶部 -->
 		<div class="layui-header header">
 			<div class="layui-main">
 				<a href="#" class="logo">医养通</a>
+                <!-- 显示/隐藏菜单 -->
+				<a href="javascript:;" class="iconfont hideMenu icon-menu1"></a>
 			    <!-- 天气信息 -->
 			    <div class="weather" pc>
 			    	<div id="tp-weather-widget"></div>
@@ -95,7 +106,7 @@
 						</a>
 						<dl class="layui-nav-child">
 							<dd><a href="javascript:;" data-url="page/user/userInfo.php"><i class="iconfont icon-zhanghu" data-icon="icon-zhanghu"></i><cite>个人资料</cite></a></dd>
-							<dd><a href="javascript:;" data-url="page/user/changePwd.php"><i class="iconfont icon-shezhi1" data-icon="icon-shezhi1"></i><cite>修改密码</cite></a></dd>
+							<dd><a href="javascript:;" data-url="page/user/alert_password/changePwd.php"><i class="iconfont icon-shezhi1" data-icon="icon-shezhi1"></i><cite>修改密码</cite></a></dd>
 							<dd><a href="javascript:;"><button class="layui-btn-transparent"><i class="iconfont icon-loginout"></i><cite>退出</cite></button></a></dd>
                          </form>
 						</dl>

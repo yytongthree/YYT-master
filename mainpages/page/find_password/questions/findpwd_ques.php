@@ -26,14 +26,12 @@
 			<p>Find the password by email</p>
 		</header>
 <?php
-	$username=$_REQUEST['username'];
-	if(!$_COOKIE['username']){
-	setcookie('username',$username,time()+1800);
-	}
-	if(!$_COOKIE['username']){
+		$username=$_REQUEST['username'];
+		setcookie('username',$username,time()+1800);
+		if(empty($username)){
 ?>
 		<script type="text/javascript">
-			alert ("用户名不能为空！");
+			alert ("用户不能为空！");
 			window.location.href="findpwd_ques.html";
 		</script>
 <?php
@@ -57,6 +55,7 @@
 			 $question3=$row['question3'];
 		 }
 	 }
+	 if($question1 || $question2 || $question3){
 ?>
 		<div class="form-content">
 			<ul>
@@ -85,16 +84,29 @@
                         <input type="text" placeholder="答案3..." name="answer3" class="form-control form-underlined"/>
 					</div>
 				</li>
+<?php 
+	 }else{
+?>
+		<script type="text/javascript">
+			alert ("未设置密保问题！");
+			<?php
+				setcookie('username',1,time()-3600);
+			?>
+			window.location.href="../findpwd_way.php";
+		</script>
+<?php } ?>
 				<li>
                 <p align="center">
 					<button class="btn btn-lg" id="sub_btn">提交</button>
 					</form>
-					<a  href="../findpwd_way.php">
+					<a  href="findpwd_ques.html">
+					<button class="btn btn-lg">更换用户名</button></a>
+                    <a  href="../findpwd_way.php">
 					<button class="btn btn-lg">换一种方法</button></a>
                     </p>
 				</li>
 			</ul>
 		</div>
-	</section>
+	</section> 
 </body>
 </html>

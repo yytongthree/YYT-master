@@ -1,4 +1,4 @@
-var $,tab,skyconsWeather;
+var $,tab,skyconsWeather,pwd=10;
 layui.config({
 	base : "js/"
 }).use(['bodyTab','form','element','layer','jquery'],function(){
@@ -7,7 +7,8 @@ layui.config({
 		element = layui.element();
 		$ = layui.jquery;
 		tab = layui.bodyTab();
-
+		upwd = checkpassword(pwd);
+			
 	//锁屏
 	function lockPage(){
 		layer.open({
@@ -29,18 +30,9 @@ layui.config({
 	
 	// 解锁
 	$("#unlock").on("click",function(){
-		/*var pass=10;
-			$.ajax({
-				url:"index.php?action=ok",
-				type:'POST',
-				data:'pass='+pass,
-				async:true,
-				success: function(data){
-					password=data;
-				}
-			})*/
+			
 		if($(this).siblings(".admin-header-lock-input").val() == ''){
-			layer.msg("请输入解锁密码！");
+			layer.msg("请输入解锁密码！"+pwd);
 		}else{
 			if($(this).siblings(".admin-header-lock-input").val() == "123456"){
 				window.sessionStorage.setItem("lockcms",false);
@@ -144,6 +136,25 @@ layui.config({
 	}
 
 })
+
+function checkpassword(password){
+	password = 2;
+	$.ajax({
+		url:"pwd.php",
+		type:'POST',
+		data:"password="+password,
+		async:true,
+		success: function(data){
+			pwd=data;
+			alert(pwd);
+		},
+        error: function(){
+			alert(pwd);
+            alert("获取数据错误！");
+       	}
+	})
+	return pwd;
+}
 
 //打开新窗口
 function addTab(_this){

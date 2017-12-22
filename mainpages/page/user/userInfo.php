@@ -41,6 +41,11 @@
 							$truename=$row['truename'];
 							$sex=$row['sex'];
 							$num=$row['num'];
+							$email=$row['email'];
+							$birth=$row['birthdate'];
+							$province=$row['province'];
+							$city=$row['city'];
+							$area=$row['area'];
 							$authority=$row['authority']; 
 							$question1=$row['question1']; 
 							$question2=$row['question2']; 
@@ -50,17 +55,17 @@
 					switch($authority){
 						case "1":{
 				?>
-                <input type="text" value="非签约用户" disabled class="layui-input layui-disabled">
+                <input type="text" value="非签约用户" disabled class="layui-input layui-disabled auth">
                 <?php
 						break;}
 						case "2":{
 				?>
-                <input type="text" value="签约用户" disabled class="layui-input layui-disabled">
+                <input type="text" value="签约用户" disabled class="layui-input layui-disabled auth">
                 <?php
 						break;}
 						case "3":{
 				?>
-                <input type="text" value="医生" disabled class="layui-input layui-disabled">
+                <input type="text" value="医生" disabled class="layui-input layui-disabled auth">
                 <?php
 						}
 					}
@@ -83,22 +88,22 @@
                 <?php
 					if($sex=="男"){
 				?>
-			    		<input type="radio" name="sex" value="男" title="男" checked="">
-	     				<input type="radio" name="sex" value="女" title="女">
-	     				<input type="radio" name="sex" value="保密" title="保密">
+			    		<input type="radio" name="sex" id="sex" value="男" title="男" checked="">
+	     				<input type="radio" name="sex" id="sex" value="女" title="女">
+	     				<input type="radio" name="sex" id="sex" value="保密" title="保密">
                  <?php
 					}else{
 						if($sex=="女"){
 				?>
-                            <input type="radio" name="sex" value="男" title="男">
-	     					<input type="radio" name="sex" value="女" title="女" checked="">
-	     					<input type="radio" name="sex" value="保密" title="保密">
+                            <input type="radio" name="sex" id="sex" value="男" title="男">
+	     					<input type="radio" name="sex" id="sex" value="女" title="女" checked="">
+	     					<input type="radio" name="sex" id="sex" value="保密" title="保密">
                 <?php
 						}else{
 				?>
-                            <input type="radio" name="sex" value="男" title="男">
-	     					<input type="radio" name="sex" value="女" title="女">
-	     					<input type="radio" name="sex" value="保密" title="保密" checked="">
+                            <input type="radio" name="sex" id="sex" value="男" title="男">
+	     					<input type="radio" name="sex" id="sex" value="女" title="女">
+	     					<input type="radio" name="sex" id="sex" value="保密" title="保密" checked="">
                 <?php
 						}
 					}
@@ -108,37 +113,61 @@
 			<div class="layui-form-item">
 			    <label class="layui-form-label">手机号码</label>
 			    <div class="layui-input-block">
-			    	<input type="tel" value="<?php echo $num;?>" placeholder="请输入手机号码" id="tel" lay-verify="required|phone" class="layui-input">
+			    	<input type="tel" value="<?php echo $num;?>" placeholder="请输入手机号码" id="tel" lay-verify="required|phone" class="layui-input tel">
 			    </div>
 			</div>
 			<div class="layui-form-item">
 			    <label class="layui-form-label">出生日期</label>
 			    <div class="layui-input-block">
-			    	<input type="text" value="" placeholder="请输入出生日期" lay-verify="required|date" onclick="layui.laydate({elem: this,max: laydate.now()})" class="layui-input">
+			    	<input type="text" value="<?php echo $birth;?>" placeholder="请输入出生日期" lay-verify="required|date" onclick="layui.laydate({elem: this,max: laydate.now()})" class="layui-input birthdate">
 			    </div>
 			</div>
 			<div class="layui-form-item">
 			    <label class="layui-form-label">家庭住址</label>
 			    <div class="layui-input-inline">
-	                <select name="province" lay-filter="province">
+	                <select name="province" lay-filter="province" id="province">
+                    <?php
+					if(empty($province)){
+					?>
 	                    <option value="">请选择省</option>
+                    <?php
+					}else{
+					?>
+						<option value="<?php echo $province;?>"><?php echo $province;?></option>
+                    <?php } ?>
 	                </select>
 	            </div>
 	            <div class="layui-input-inline">
-	                <select name="city" lay-filter="city" disabled>
+	                <select name="city" lay-filter="city" disabled id="city">
+                    <?php
+					if(empty($city)){
+					?>
 	                    <option value="">请选择市</option>
+                    <?php
+					}else{
+					?>
+                    <option value="<?php echo $city;?>"><?php echo $city;?></option>
+                    <?php } ?>
 	                </select>
 	            </div>
 	            <div class="layui-input-inline">
-	                <select name="area" lay-filter="area" disabled>
+	                <select name="area" lay-filter="area" disabled id="area">
+                    <?php
+					if(empty($area)){
+					?>
 	                    <option value="">请选择县/区</option>
+                    <?php
+					}else{
+					?>
+                    <option value="<?php echo $area;?>"><?php echo $area;?></option>
+                    <?php } ?>
 	                </select>
 	            </div>
 			</div>
 			<div class="layui-form-item">
 			    <label class="layui-form-label">邮箱</label>
 			    <div class="layui-input-block">
-			    	<input type="text" value="" placeholder="请输入邮箱" lay-verify="required|email" class="layui-input">
+			    	<input type="text" value="<?php echo $email;?>" placeholder="请输入邮箱" lay-verify="required|email" class="layui-input email">
 			    </div>
 			</div>
 			<div class="layui-form-item">

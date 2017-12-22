@@ -13,14 +13,16 @@ layui.config({
 		laydate = layui.laydate;
         loadProvince();
 		$.ajax({
-		url:"pwd.php?action=ok",
-		type:'POST',
-		data:'pwd='+pwd,
-		async:true,
-		success: function(data){
-			pwd=data;
-		}
-	})
+			url:"pwd.php?action=ok",
+			type:'POST',
+			data:'pwd='+pwd,
+			async:true,
+			success: function(data){
+				pwd=data;
+			}
+		})
+		
+
 
         layui.upload({
         	url : "../../json/userface.json",
@@ -34,33 +36,32 @@ layui.config({
 
 
         //添加验证规则
-        form.verify({
-            oldPwd : function(value, item){
-                $.ajax({
+		form.verify({
+			oldPwd : function(value, item){
+				$.ajax({
 					url:"md5.php?action=ok",
 					type:'POST',
 					data:'value='+value,
-					async:true,
+					async:false,
 					success: function(data){
-						value=data;
-						 if(value != pwd){
-                    		return "密码错误，请重新输入！";
-                		}
-					}
-				})           
-            },
-            newPwd : function(value, item){
-                if(value.length < 6){
-                    return "密码长度不能小于6位";
-                }
-            },
-            confirmPwd : function(value, item){
-                if(!new RegExp($("#Pwd").val()).test(value)){
-                    return "两次输入密码不一致，请重新输入！";
-                }
-            }
-        })
-
+						pass=data;
+                	}
+				}) 
+				if(pass != pwd){
+                    return "密码错误，请重新输入！";  
+				} 
+			},
+			newPwd : function(value, item){
+				if(value.length < 6){
+					return "密码长度不能小于6位";
+				}
+			},
+			confirmPwd : function(value, item){
+				if(!new RegExp($("#Pwd").val()).test(value)){
+					return "两次输入密码不一致，请重新输入！";
+				}
+			}
+		})
         //判断是否修改过头像，如果修改过则显示修改后的头像，否则显示默认头像
         if(window.sessionStorage.getItem('userFace')){
         	$("#userFace").attr("src",window.sessionStorage.getItem('userFace'));
@@ -69,16 +70,52 @@ layui.config({
         }
 
         //提交个人资料
-        form.on("submit(changeUser)",function(data){
-        	var index = layer.msg('提交中，请稍候',{icon: 16,time:false,shade:0.8});
-            setTimeout(function(){
-                layer.close(index);
-                layer.msg("提交成功！");
-            },2000);
-        	return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
-        })
-
-        
+		var changeUser,data_check;
+ 		form.on("submit(changeUser)",function(data){
+			changeUser = '{"userauth":"'+ $(".auth").val() +'",';
+ 			changeUser += '"usersex":"'+ data.field.sex +'",';
+ 			changeUser += '"usertel":"'+ $(".tel").val() +'",'; 
+ 			changeUser += '"userdate":"'+ $(".birthdate").val() +'",';
+ 			changeUser += '"addr":"'+ data.field.province + '_' + data.field.city + '_' + data.field.area +'",';
+ 			changeUser += '"email":"'+ $(".email").val() + '"}';
+			var arr=changeUser;
+ 			
+			$.ajax({
+				url:"change_user_info.php?action=ok",
+				type:'POST',
+				data:"arr="+arr,
+				async:false,
+				success: function(data){
+					data_check=data;
+				},
+        		error: function(){
+            		alert("获取数据错误！");
+       			}
+			})
+			
+			//弹出loading
+			if(data_check == 1){
+ 				var index = top.layer.msg('数据提交中，请稍候',{icon: 16,time:false,shade:0.8});
+			
+				setTimeout(function(){
+     	      		top.layer.close(index);
+					top.layer.msg("提交成功！");
+ 					layer.closeAll("iframe");
+	 				//刷新页面
+		 			location.reload();
+    	    	},2000);
+			}else{
+				var index = top.layer.msg('数据提交中，请稍候',{icon: 16,time:false,shade:0.8});
+			
+				setTimeout(function(){
+     	      		top.layer.close(index);
+					top.layer.msg("提交失败！");
+ 					layer.closeAll("iframe");
+    	    	},2000);
+			}
+			return false;
+ 		})
+	
 
         //修改密码
         form.on("submit(changePwd)",function(data){
@@ -94,17 +131,18 @@ layui.config({
 				}
 			})
 			if(newpwd){
-            				setTimeout(function(){
-                				layer.close(index);
+            	setTimeout(function(){
+                	layer.close(index);
                 	layer.msg("密码修改成功！");
                 	$(".pwd").val('');
+					location.reload();
             	},2000);
-				alert(newpwd);
 			}else{
 				 setTimeout(function(){
                 	layer.close(index);
                 	layer.msg("密码修改失败！");
                 	$(".pwd").val('');
+					location.reload();
             	},2000);
 			}
 
@@ -117,7 +155,7 @@ layui.config({
 function loadProvince() {
     var proHtml = '';
     for (var i = 0; i < areaData.length; i++) {
-        proHtml += '<option value="' + areaData[i].provinceCode + '_' + areaData[i].mallCityList.length + '_' + i + '">' + areaData[i].provinceName + '</option>';
+        proHtml += '<option value="' + areaData[i].provinceCode + '_' + areaData[i].mallCityList.length + '_' + i + '_' + areaData[i].provinceName + '">' + areaData[i].provinceName + '</option>';
     }
     //初始化省数据
     $form.find('select[name=province]').append(proHtml);
@@ -140,7 +178,7 @@ function loadProvince() {
 function loadCity(citys) {
     var cityHtml = '<option value="">请选择市</option>';
     for (var i = 0; i < citys.length; i++) {
-        cityHtml += '<option value="' + citys[i].cityCode + '_' + citys[i].mallAreaList.length + '_' + i + '">' + citys[i].cityName + '</option>';
+        cityHtml += '<option value="' + citys[i].cityCode + '_' + citys[i].mallAreaList.length + '_' + i + '_' + citys[i].cityName + '">' + citys[i].cityName + '</option>';
     }
     $form.find('select[name=city]').html(cityHtml).removeAttr("disabled");
     form.render();
@@ -161,7 +199,7 @@ function loadCity(citys) {
 function loadArea(areas) {
     var areaHtml = '<option value="">请选择县/区</option>';
     for (var i = 0; i < areas.length; i++) {
-        areaHtml += '<option value="' + areas[i].areaCode + '">' + areas[i].areaName + '</option>';
+        areaHtml += '<option value="' + areas[i].areaCode + '_' + areas[i].areaName + '">' + areas[i].areaName + '</option>';
     }
     $form.find('select[name=area]').html(areaHtml).removeAttr("disabled");
     form.render();

@@ -38,7 +38,8 @@
 ?>
 		<script type="text/javascript">
 			alert ("验证失败！");
-			window.location.href="findpwd_ques.php";
+			var url="<?php echo $username;?>";
+			window.location.href="findpwd_ques.php?username="+url;
 		</script>
 <?php
 	}
