@@ -32,7 +32,7 @@ layui.config({
 							var selectStr = $(".search_input").val();
 		            		function changeStr(data){
 		            			var dataStr = '';
-		            			var showNum = data.split(eval("/"+selectStr+"/ig")).length - 1;//eval函数运行括号内的表达式，即该句为通过eval函数组合正则表达式,split函数通过eval返回的正则表达式指定的边界将字符串data分割成子串创建的字符串数组，得出数组长度减1,showNum为得到的字符串数组的最大下标
+		            			var showNum = data.split(eval("/"+selectStr+"/ig")).length - 1;
 		            			if(showNum > 1){
 									for (var j=0;j<showNum;j++) {
 		            					dataStr += data.split(eval("/"+selectStr+"/ig"))[j] + "<i style='color:#03c339;font-weight:bold;'>" + selectStr + "</i>";
@@ -45,7 +45,7 @@ layui.config({
 		            			}
 		            		}
 		            		//用户名
-		            		if(usersStr.name.indexOf(selectStr) > -1){//indexOf返回指定字符在字符串中首次出现的位置
+		            		if(usersStr.name.indexOf(selectStr) > -1){
 			            		usersStr["name"] = changeStr(usersStr.name);
 		            		}
 		            		//电话
@@ -111,7 +111,7 @@ layui.config({
 		}
 
 		//分页
-		var nums = 10; //每页出现的数据量
+		var nums = 13; //每页出现的数据量
 		laypage({
 			cont : "page",
 			pages : Math.ceil(usersData.length/nums),
@@ -119,7 +119,7 @@ layui.config({
 				$(".users_content").html(renderDate(usersData,obj.curr));
 				$('.users_list thead input[type="checkbox"]').prop("checked",false);
 		    	form.render();
-			}//Math.ceil()执行向上舍入，即它总是将数值向上舍入为最接近的整数；
+			}
 		})
 	}
         
