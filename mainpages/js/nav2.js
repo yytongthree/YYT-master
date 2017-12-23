@@ -26,7 +26,7 @@ var navs2 = [{
 },{
 	"title" : "聊天室",
 	"icon" : "icon-text",
-	"href" : "page/chat/main.php",
+	"href" : "page/chat/chatroom.html",
 	"spread" : false
 },{
 	"title" : "文章列表",

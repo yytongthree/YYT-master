@@ -26,12 +26,22 @@
 		password varchar(50) not null,
 		truename varchar(50) not null,
 		sex varchar(10) not null,
+		birthdate date not null,
 		age int not null,
 		num varchar(11) not null,
 		email text not null,
-		addr varchar(50),
+		province varchar(100),
+		city varchar(50),
+		area varchar(50),
 		authority varchar(1),
-		picture blob
+		picture blob,
+		getpasstime int(10),
+		question1 text,
+		question2 text,
+		question3 text,
+		answer1 text,
+		answer2 text,
+		answer3 text
 	)";
 	if(mysqli_query($conn,$sql))
    {

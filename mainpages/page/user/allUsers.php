@@ -47,4 +47,7 @@
 	}else{
 		echo "未找到记录";
 	}
+	//释放记录集所占用的内存  
+    mysqli_free_result($result);  
+	mysqli_close($conn);
 ?>
