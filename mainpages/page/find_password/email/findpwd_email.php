@@ -34,16 +34,16 @@
 			$result2=mysqli_query($conn,$sql2);
 			$getpasstime = time();
 			if(mysqli_num_rows($result2)>0){   
-				while($row=mysqli_fetch_array($result1)){
+				while($row=mysqli_fetch_array($result2)){
 					$uname=$row['name'];
 					$password=$row['password'];
 					$arr = array($uname,$password);
 					$name_pass=implode(' ',$arr);
 					$token = md5($name_pass);//组合验证码
 				}
-				$url="http://localhost/YYT-master/mainpages/page/find_password/reset.php?email=".$email;
-				//$url = "http://localhost/YYT-master/mainpages/page/find_password/reset.html?email=".$email."&token=".$token;//构造URL
-				$time = date('Y-m-d H:i'); 
+			//	$url="http://localhost/YYT-master/mainpages/page/find_password/reset.php?email=".$email;
+				$url = "http://localhost/YYT-master/mainpages/page/find_password/reset.php?email=".$email."&token=".$token;//构造URL
+				$time = date("Y-m-d H:i:s"); 
 				$result = sendmail($time,$email,$url);
 				if($result==1){//邮件发送成功
 ?>
@@ -69,21 +69,23 @@
 	
 	//发送邮件 
 	function sendmail($time,$email,$url){ 
-		include_once("smtp.class.php"); 
-		$smtpserver = "smtp.163.com"; //SMTP服务器，如smtp.163.com 
-		$smtpserverport = 25; //SMTP服务器端口 
+		include_once("smtp.php"); 
 		$smtpusermail = "yytongthree@163.com"; //SMTP服务器的用户邮箱 
-		$smtpuser = "yytongthree"; //SMTP服务器的用户帐号 
-		$smtppass = "yytong2017"; //SMTP服务器的用户密码 
-		$smtp = new Smtp($smtpserver, $smtpserverport, true, $smtpuser, $smtppass); 
 		//这里面的一个true是表示使用身份验证,否则不使用身份验证. 
 		$emailtype = "HTML"; //信件类型，文本:text；网页：HTML 
 		$smtpemailto = $email; 
 		$smtpemailfrom = $smtpusermail; 
 		$emailsubject = "医养通系统 - 找回密码"; 
 		$emailbody = "亲爱的".$email."：<br/>您在".$time."提交了找回密码请求。请点击下面的链接重置密码（按钮24小时内有效）。<br/><a href='".$url."'target='_blank'>".$url."</a>"; 
-		$rs = $smtp->sendmail($smtpemailto, $smtpemailfrom, $emailsubject, $emailbody, $emailtype); 
-		return $rs; 
+		
+		$mail = new MySendMail();
+	//	$mail->setServer("smtp@126.com", "XXXXX@126.com", "XXXXX"); //设置smtp服务器，普通连接方式
+		$mail->setServer("smtp.163.com", "yytongthree", "yytong2017", 465, true); //设置smtp服务器，到服务器的SSL连接
+		$mail->setFrom($smtpemailfrom); //设置发件人
+		$mail->setReceiver($smtpemailto); //设置收件人，多个收件人，调用多次
+		$mail->setMail($emailsubject, $emailbody); //设置邮件主题、内容
+		$rs = $mail->sendMail();
+		return $rs;
 	}
 
 ?>

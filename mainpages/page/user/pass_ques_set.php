@@ -32,7 +32,7 @@
 ?>
 		<script type="text/javascript">
 			alert ("提交成功！");
-			window.location.href="pass_ques_set.html";
+			window.location.href="userinfo.php";
 		</script>
 <?php	
 	}else {

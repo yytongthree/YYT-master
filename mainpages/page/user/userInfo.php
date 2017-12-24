@@ -186,6 +186,10 @@
 			?>
                     <p><a href="pass_ques_set.html" class="layui-btn layui-btn-danger">一个密保问题都没有！太危险啦！点我设置！</a></p>
             <?php
+				}else{
+					?>
+					<p><a href="pass_ques_set.html" class="layui-btn layui-btn-warm">更改密保问题</a></p>
+			<?php
 				}
 			?>
 		</div>

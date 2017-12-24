@@ -135,7 +135,8 @@ layui.config({
                 	layer.close(index);
                 	layer.msg("密码修改成功！");
                 	$(".pwd").val('');
-					location.reload();
+					alert("密码改变，请重新登录！");
+					parent.window.location='../../../../exit.php';
             	},2000);
 			}else{
 				 setTimeout(function(){

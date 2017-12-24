@@ -1,5 +1,4 @@
-var $;
-var uname;
+var $,laypage;
 layui.config({
 	base : "../../js/"
 }).use(['form','layer','layedit','laypage'],function(){
@@ -27,30 +26,19 @@ layui.config({
     });
 
     //加载数据
+	var chatsData = '';
 	setInterval(function(){
 		$.get("chatroom.php",function(data){
-			data = JSON.parse(data);
-			var msgReplyHtml = '',msgReply;
-			for(var i=0; i<data.length; i++){
-				msgReplyHtml += '<tr>';
-				msgReplyHtml += '  <td class="msg_info">';
-				msgReplyHtml += '    <img src="../../images/face.jpg" width="50" height="50">';
-				msgReplyHtml += '    <div class="user_info">';
-				msgReplyHtml += '        <h2>'+data[i].name+'</h2>';
-				msgReplyHtml += '        <p>'+data[i].content+'</p>';
-				msgReplyHtml += '    </div>';
-				msgReplyHtml += '  </td>';
-				msgReplyHtml += '  <td class="msg_time">'+data[i].saytime+'</td>';
-				msgReplyHtml += '</tr>';
-			}
-			$(".msgReplyHtml").html(msgReplyHtml);
+			chatData = data;
+			chatData = JSON.parse(chatData);
+			usersList();
 
         	//改变窗口大小时，重置弹窗的高度，防止超出可视区域（如F12调出debug的操作）
 			$(window).resize(function(){
 				layui.layer.full(index);
 			})
 			layui.layer.full(index);
-		})},1)
+		})},500)
 
     //提交回复
     var message = [];
@@ -77,17 +65,43 @@ layui.config({
         }
     })
 	
-	//分页
-	var nums = 10; //每页出现的数据量
-	laypage({
-		cont : "page",
-		pages : Math.ceil(data.length/nums),
-		jump : function(obj){
-			$(".users_content").html(renderDate(data,obj.curr));
-			$('.users_list thead input[type="checkbox"]').prop("checked",false);
-	    	form.render();
-		}//Math.ceil()执行向上舍入，即它总是将数值向上舍入为最接近的整数；
-	})
-	
+	function usersList(){
+		//渲染数据
+			function renderDate(data,curr){
+				var msgReplyHtml = '';
+				currData = chatData.concat().splice(curr*nums-nums, nums);
+				if(currData.length != 0){
+					for(var i=0; i<currData.length; i++){
+						msgReplyHtml += '<tr>';
+						msgReplyHtml += '  <td class="msg_info">';
+						msgReplyHtml += '    <img src="../../images/face.jpg" width="50" height="50">';
+						msgReplyHtml += '    <div class="user_info">';
+						msgReplyHtml += '        <h2>'+currData[i].name+'</h2>';
+						msgReplyHtml += '        <p>'+currData[i].content+'</p>';
+						msgReplyHtml += '    </div>';
+						msgReplyHtml += '  </td>';
+						msgReplyHtml += '  <td class="msg_time">'+currData[i].saytime+'</td>';
+						msgReplyHtml += '</tr>';
+					}
+				}
+				return msgReplyHtml;
+			}
+			//分页
+			var nums = 3; //每页出现的数据量
+			laypage({
+				cont : "page",
+				pages : Math.ceil(chatData.length/nums),
+				curr: location.hash.replace('#!fenye=', ''), //获取hash值为fenye的当前页
+    			hash: 'fenye',
+				jump : function(obj,first){
+					if(!first){
+						layer.msg('第'+obj.curr+'页');
+					}
+					$(".msgReplyHtml").html(renderDate(chatData,obj.curr));
+					$('.users_list thead input[type="checkbox"]').prop("checked",false);
+					form.render();
+				}//Math.ceil()执行向上舍入，即它总是将数值向上舍入为最接近的整数；
+			})
+		}
 })
 

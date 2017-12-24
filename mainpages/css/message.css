@@ -13,3 +13,7 @@
 /*回复*/
 .replay_edit{ overflow: hidden; margin-bottom:20px; }
 .replay_edit a{margin-top: 10px; width:100px; float:right;}
+
+/*分页*/
+#page{ text-align:right; }
+#page_history{ text-align:right; }

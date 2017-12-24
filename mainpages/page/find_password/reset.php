@@ -27,9 +27,11 @@
 		</header>
         <?php
 			$email=$_GET['email'];
+			$token=$_GET['token'];
 			$username=$_GET['username'];
 			if($email){
 				setcookie('email',$email,time()+900);
+				setcookie('token',$token,time()+900);
 			}
 			if($username){
 				setcookie('username',$username,time()+900);
