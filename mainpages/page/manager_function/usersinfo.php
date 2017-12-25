@@ -239,10 +239,5 @@ function showTable($conn,$table_name,$checkbox){
 	}
 	mysqli_close($conn);
 ?>
- <div class="layui-form-item"></div>
- <div class="layui-input-block"></div>
- <p><form action="userInfo.html" method="post"> 
- <td> <p align="center"><button type="submit" class="layui-btn layui-btn-big layui-btn-danger">修改该用户资料</button></p></td>
- </form>
 </body>
 </html>
