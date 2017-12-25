@@ -1,4 +1,4 @@
-/*
+﻿/*
 	@Author: 请叫我马哥
 	@Time: 2017-04
 	@Tittle: tab
@@ -42,6 +42,15 @@ layui.define(["element","jquery"],function(exports){
 		element.init();  //初始化页面元素
 		$(window).resize(function(){
 			$(".navBar3").height($(window).height()-230);
+		})
+	}
+
+	if($(".navBar4").html() == ''){
+		var _this = this;
+		$(".navBar4").html(navBar4(navs4)).height($(window).height()-230);
+		element.init();  //初始化页面元素
+		$(window).resize(function(){
+			$(".navBar4").height($(window).height()-230);
 		})
 	}
 
