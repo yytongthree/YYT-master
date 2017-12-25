@@ -29,7 +29,7 @@
 
 	$conn=mysqli_connect("localhost","root","wenny673","yyt_info") or die("Unable to connect!");
 	function showTable($conn,$table_name){ 
-		$sql = "select * from $table_name WHERE status=2";
+		$sql = "select * from $table_name WHERE status=2 and userName='{$_SESSION['username']}'";
 		$res = mysqli_query($conn,$sql);
 		//循环取出数据  
          //如果返回的数据集行数大于0，则开始以表格的形式显示
