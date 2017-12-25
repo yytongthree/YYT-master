@@ -15,9 +15,8 @@
 </head>
 <body> 
 <?php
-	$checkbox=$_REQUEST["checkbox"];echo $checkbox;
-  	$authority=$_REQUEST["authority"];echo $authority;
-	
+	$checkbox=$_REQUEST["checkbox"];
+  	$authority=$_REQUEST["authority"];
     $conn=mysqli_connect("localhost","root","wenny673","yyt_info"); 
 	// 检查连接 
 	if (!$conn) 
@@ -63,9 +62,7 @@
 </table>-->
 <?php
 function showTable($conn,$table_name,$checkbox){ 
-		$sql = "select * from $table_name where ID='{$checkbox}'";//WHERE ID='{$checkbox}'
-		echo $sql;
-		//写死试试，现在的问题是，没有数据显示出来
+		$sql = "select * from $table_name where ID='{$checkbox}'";
 		$res = mysqli_query($conn,$sql);
 		//循环取出数据
 		if(mysqli_num_rows($res)>0){  
@@ -141,7 +138,7 @@ function showTable($conn,$table_name,$checkbox){
      <!--</form>
 </table>-->
 <?php
-function showTable($conn,$table_name){ 
+function showTable($conn,$table_name,$checkbox){ 
 		$sql = "select * from $table_name WHERE ID='{$checkbox}' ";
 		$res = mysqli_query($conn,$sql);
 		//循环取出数据
@@ -169,7 +166,7 @@ function showTable($conn,$table_name){
 		mysqli_free_result($res); 
 		}
 	}
-	showTable($conn,"inha_info");
+	showTable($conn,"inha_info",$checkbox);
 	?>
         </form>
 	</table>
@@ -211,7 +208,7 @@ function showTable($conn,$table_name){
     <!-- </form>
 </table>-->
 <?php
-function showTable($conn,$table_name){ 
+function showTable($conn,$table_name,$checkbox){ 
 		$sql = "select * from $table_name WHERE ID='{$checkbox}' ";
 		$res = mysqli_query($conn,$sql);
 		//循环取出数据
@@ -232,7 +229,7 @@ function showTable($conn,$table_name){
 		mysqli_free_result($res); 
 		}
 	}
-	showTable($conn,"docter_info");
+	showTable($conn,"docter_info",$checkbox);
 	
 	?>
         </form>
