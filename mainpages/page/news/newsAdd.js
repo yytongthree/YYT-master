@@ -1,4 +1,4 @@
-layui.config({
+﻿layui.config({
 	base : "js/"
 }).use(['form','layer','jquery','layedit','laydate'],function(){
 	var form = layui.form(),
@@ -25,7 +25,7 @@ layui.config({
  		//addNews += '"newsLook":"'+$(".newsLook option").eq($(".newsLook").val()).text()+'",'; //开放浏览
  		addNews += '"newsTime":"'+$(".newsTime").val()+'",'; //发布时间
  		addNews += '"newsAuthor":"'+$(".newsAuthor").val()+'",'; //文章作者
- 		/*addNews += '"isShow":"'+ isShow +'",';  //是否展示
+              addNews += '"newsSum":"'+$(".newsSum").val()+'",'; //文章简介            addNews += '"keywords":"'+$(".keywords").val()+'",'; //文章关键词		/*addNews += '"isShow":"'+ isShow +'",';  //是否展示
  		addNews += '"newsStatus":"'+ newsStatus +'"}'; //审核状态*/
  		addNewsArray.unshift(JSON.parse(addNews));
  		window.sessionStorage.setItem("addNews",JSON.stringify(addNewsArray));
