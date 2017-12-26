@@ -24,19 +24,17 @@ layui.config({
 
         layui.upload({
         	url : "upload_file.php",
-			elem: '#dddd',
+			elem: '#file',
 			before: function(input){
 				var index = top.layer.msg('上传中，请稍候',{icon: 16,time:false,shade:0.8});			
 				setTimeout(function(){
      	      		layer.close(index);
-    	    	},500);
+    	    	},2000);
 			},
         	success: function(res){
-				alert(res.url);
-        		var num = parseInt(4*Math.random());  //生成0-4的随机数
-        		//随机显示一个头像信息
-		    	userFace.src = res.data[num].src;
-		    	window.sessionStorage.setItem('userFace',res.data[num].src);
+				alert(res.src);
+				userFace.src = res.src;
+				window.sessionStorage.setItem('userFace',res.src);
 		    }
         });
 

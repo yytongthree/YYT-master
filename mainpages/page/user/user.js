@@ -31,6 +31,7 @@ layui.config({
         		//随机显示一个头像信息
 		    	userFace.src = res.data[num].src;
 		    	window.sessionStorage.setItem('userFace',res.data[num].src);
+				
 		    }
         });
 

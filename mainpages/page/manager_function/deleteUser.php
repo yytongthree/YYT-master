@@ -9,7 +9,6 @@
 <?php
 	$checkbox=$_REQUEST["checkbox"];
   	$authority=$_REQUEST["authority"];
-	
     $conn=mysqli_connect("localhost","root","wenny673","yyt_info"); 
 	// 检查连接 
 	if (!$conn) 
@@ -17,29 +16,33 @@
     	die("连接错误: " . mysqli_connect_error()); 
 	} 
 
-	if($authority="非签约用户")
+	if($authority=="非签约用户")
 		{
 			/*echo "<script language=javascript>confirm('确认删除该非签约用户吗？')</script>";*/
 			mysqli_query($conn,"DELETE FROM register_info WHERE ID='{$checkbox}'");
 	echo "<script language=javascript>alert('删除非签约用户成功！')</script>"; 
 	}
 	else{
-		if($authority="签约用户")
+		if($authority=="签约用户")
 			{
 				/*echo "<script language=javascript>confirm('确认删除该签约用户吗？')</script>";*/
+				mysqli_query($conn,"DELETE FROM register_info WHERE ID='{$checkbox}'");
 				mysqli_query($conn,"DELETE FROM inha_info WHERE ID='{$checkbox}'");
 	echo "<script language=javascript>alert('删除签约用户成功！')</script>"; 
 	}
 	else{
-		if($authority="医生")
+		if($authority=="医生")
 			{
 				/*echo "<script language=javascript>confirm('确认删除该签约用户吗？')</script>";*/
+				mysqli_query($conn,"DELETE FROM register_info WHERE ID='{$checkbox}'");
+				echo "<script language=javascript>alert('删除医生注册信息成功！')</script>"; 
 				mysqli_query($conn,"DELETE FROM docter_info WHERE ID='{$checkbox}'");
-	echo "<script language=javascript>alert('删除医生成功！')</script>"; 
+	echo "<script language=javascript>alert('删除医生在案成功！')</script>"; 
 	}
 	}
 	}
 mysqli_close($conn);
 ?>
+<script>window.location.href="delete.php";</script>
 </body>
 </html>

@@ -17,7 +17,7 @@ var navs3 = [{
 		{
 			"title" : "聊天室",
 			"icon" : "&#xe631;",
-			"href" : "page/chat/main.php",
+			"href" : "page/chat/chatroom.html",
 			"spread" : false
 		},
 		{
