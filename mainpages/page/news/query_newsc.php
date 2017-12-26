@@ -18,6 +18,7 @@
 			while($row=mysqli_fetch_array($res)){ 
 				echo "<tr>";
 ?>
+<tbody>
 <td style="text-align:center;"> 
 <?php
     echo $row['newsName'];
@@ -42,7 +43,7 @@
 	mysqli_close($conn);
  ?>
 
-            </tbody>       
+     </tbody>       
 
 </body>
 </html>

@@ -24,7 +24,7 @@ var navs2 = [{
 		}
 	]
 },{
-	"title" : "聊天室",
+	"title" : "聊天中心",
 	"icon" : "icon-text",
 	"href" : "page/chat/main.php",
 	"spread" : false,
@@ -43,7 +43,7 @@ var navs2 = [{
 		}
 	]
 },{
-	"title" : "相关咨询",
+	"title" : "相关资讯",
 	"icon" : "icon-text",
 	"href" : "page/chat/main.php",
 	"spread" : false,
@@ -57,7 +57,7 @@ var navs2 = [{
 		{
 			"title" : "查看公告",
 			"icon" : "icon-text",
-			"href" : "page/notice/query_noticec.php",
+			"href" : "page/notice/query_notice.php",
 			"spread" : false
 		}
 	]

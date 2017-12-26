@@ -9,6 +9,7 @@
 
 <?php
 	$ID=$_REQUEST["checkbox"];
+	echo $ID;
 	$conn=mysqli_connect("localhost","root","wenny673","yyt_info") or die("Unable to connect!");
 		$sql = "select * from notice WHERE ID='{$ID}'" ;
 		$res = mysqli_query($conn,$sql) or die("Error in query: $sql. ".mysqli_error());

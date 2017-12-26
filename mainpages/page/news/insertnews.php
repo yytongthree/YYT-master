@@ -17,7 +17,7 @@
 ?>
 		<script type="text/javascript"> 
     		alert("提交成功"); 
-    		window.location.href="newsAdd.html"; 
+    		window.location.href="manage_news.php"; 
  		</script>
 <?php
 	} else {

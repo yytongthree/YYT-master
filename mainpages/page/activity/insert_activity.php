@@ -1,8 +1,7 @@
-  <?php
+<?php
 	session_start(); 
-	$name=$_REQUEST["noticeName"];
-	$time=$_REQUEST["noticeTime"];
-	$keywords=$_REQUEST["keywords"];
+	$name=$_REQUEST["activityName"];
+	$time=$_REQUEST["activityTime"];
 	$content=$_REQUEST["content"];
 	
 	$conn=mysqli_connect("localhost","root","wenny673","yyt_info"); 
@@ -11,12 +10,12 @@
 	{ 
     	die("连接错误: " . mysqli_connect_error()); 
 	}
-	$sql="INSERT INTO notice (noticeName,noticeTime,keywords,content) VALUES('{$name}','{$time}','{$keywords}','{$content}')";
+	$sql="INSERT INTO activity (name,time,content) VALUES('{$name}','{$time}','{$content}')";
    	if(mysqli_query($conn,$sql)){
 ?>
 		<script type="text/javascript"> 
-    		alert("提交成功"); 
-    		window.location.href="manage_notice.php"; 
+    		alert("活动提交成功"); 
+    		window.location.href="activityAdd.html"; 
  		</script>
 <?php
 	} else {

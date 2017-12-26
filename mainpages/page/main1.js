@@ -11,26 +11,42 @@ layui.config({
 	})
 
 	//动态获取文章总数和待审核文章数量,最新文章
-	$.get("../json/newsList.json",
+	$.get("query_news.php",
 		function(data){
-			var waitNews = [];
+			alert(data);
+			data=JSON.parse(data);
+			alert(data);
 			$(".allNews span").text(data.length);  //文章总数
-			for(var i=0;i<data.length;i++){
-				var newsStr = data[i];
-				if(newsStr["newsStatus"] == "待审核"){
-					waitNews.push(newsStr);
-				}
-			}
-			$(".waitNews span").text(waitNews.length);  //待审核文章
 			//加载最新文章
 			var hotNewsHtml = '';
-			for(var i=0;i<5;i++){
+			for(var i=0;i<data.length;i++){
 				hotNewsHtml += '<tr>'
 		    	+'<td align="left">'+data[i].newsName+'</td>'
+				+'<td>'+data[i].newsAuthor+'</td>'
+				+'<td>'+data[i].newsSum+'</td>'
 		    	+'<td>'+data[i].newsTime+'</td>'
 		    	+'</tr>';
 			}
 			$(".hot_news").html(hotNewsHtml);
+		}
+	)
+	
+	//动态获最新活动
+	$.get("query.php",
+		function(data){
+			alert(data);
+			data=JSON.parse(data);
+			alert(data);
+			//加载最新活动
+			var activityHtml = '';
+			for(var i=0;i<data.length;i++){
+				activityHtml += '<tr>'
+		    	+'<td align="left">'+data[i].name+'</td>'
+		    	+'<td>'+data[i].addtime+'</td>'
+				+'<td>'+data[i].content+'</td>'
+		    	+'</tr>';
+			}
+			$(".activity").html(activityHtml);
 		}
 	)
 

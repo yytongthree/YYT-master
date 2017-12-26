@@ -17,6 +17,11 @@
 	} 
 
 mysqli_query($conn,"DELETE FROM notice WHERE ID='{$checkbox}'");
-echo "<script language=javascript>alert('删除成功！')</script>"; 
 mysqli_close($conn);
 ?>
+<script language=javascript> 
+alert('公告删除已成功！');
+window.location.href="manage_notice.php";
+</script>"
+</body>
+</html>

@@ -18,15 +18,13 @@
 	 	}
 	 	//显示、审核状态
  		var isShow = data.field.show=="on" ? "checked" : "",
- 			newsStatus = data.field.shenhe=="on" ? "审核通过" : "待审核";
 
  		addNews = '{"newsName":"'+$(".newsName").val()+'",';  //文章名称
  		addNews += '"newsId":"'+new Date().getTime()+'",';	 //文章id
- 		//addNews += '"newsLook":"'+$(".newsLook option").eq($(".newsLook").val()).text()+'",'; //开放浏览
  		addNews += '"newsTime":"'+$(".newsTime").val()+'",'; //发布时间
  		addNews += '"newsAuthor":"'+$(".newsAuthor").val()+'",'; //文章作者
-              addNews += '"newsSum":"'+$(".newsSum").val()+'",'; //文章简介            addNews += '"keywords":"'+$(".keywords").val()+'",'; //文章关键词		/*addNews += '"isShow":"'+ isShow +'",';  //是否展示
- 		addNews += '"newsStatus":"'+ newsStatus +'"}'; //审核状态*/
+        addNews += '"newsSum":"'+$(".newsSum").val()+'",'; //文章简介           
+		addNews += '"keywords":"'+$(".keywords").val()+'",'; //文章关键词
  		addNewsArray.unshift(JSON.parse(addNews));
  		window.sessionStorage.setItem("addNews",JSON.stringify(addNewsArray));
  		//弹出loading

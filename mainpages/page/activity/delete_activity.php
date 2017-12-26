@@ -2,7 +2,7 @@
 <html> 
 <head> 
 <meta charset="UTF-8"> 
-  <title>删除新闻</title> 
+  <title>删除活动</title> 
 </head> 
 <body> 
  <?php
@@ -15,13 +15,7 @@
     	die("连接错误: " . mysqli_connect_error()); 
 	} 
 
-mysqli_query($conn,"DELETE FROM news WHERE ID='{$checkbox}'");
-
+mysqli_query($conn,"DELETE FROM activity WHERE ID='{$checkbox}'");
+echo "<script language=javascript>alert('活动已经删除！')</script>"; 
 mysqli_close($conn);
 ?>
-<script language=javascript>
-alert('删除已成功！');
-window.location.href="manage_news.php";
-</script>"
-</body>
-</html>

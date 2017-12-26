@@ -4,7 +4,12 @@ var navs3 = [{
 	"href" : "page/main3.html",
 	"spread" : false
 },{
-	"title" : "聊天室",
+	"title" : "查看公告",
+	"icon" : "icon-text",
+	"href" : "page/notice/query_notice.php",
+	"spread" : false
+},{
+	"title" : "聊天中心",
 	"icon" : "icon-text",
 	"href" : "page/chat/main.php",
 	"spread" : false,

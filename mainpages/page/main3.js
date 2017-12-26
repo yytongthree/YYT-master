@@ -9,6 +9,25 @@ layui.config({
 	$(".panel a").on("click",function(){
 		window.parent.addTab($(this));
 	})
+	
+	//动态获最新活动
+	$.get("query.php",
+		function(data){
+			alert(data);
+			data=JSON.parse(data);
+			alert(data);
+			//加载最新活动
+			var activityHtml = '';
+			for(var i=0;i<data.length;i++){
+				activityHtml += '<tr>'
+		    	+'<td align="left">'+data[i].name+'</td>'
+		    	+'<td>'+data[i].addtime+'</td>'
+				+'<td>'+data[i].content+'</td>'
+		    	+'</tr>';
+			}
+			$(".activity").html(activityHtml);
+		}
+	)
 
 	//用户数
 	$.get("../page/user/allUsers.php",

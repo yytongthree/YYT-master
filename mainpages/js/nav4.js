@@ -54,6 +54,12 @@
 			"spread" : false
 		},
 		{
+			"title" : "管理活动",
+			"icon" : "&#xe631;",
+			"href" : "page/activity/manage_activity.php",
+			"spread" : false
+		},
+		{
 			"title" : "管理文章",
 			"icon" : "&#xe631;",
 			"href" : "page/news/manage_news.php",
