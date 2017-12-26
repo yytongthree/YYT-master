@@ -82,7 +82,7 @@ layui.config({
 					for(var i=0; i<data.length; i++){
 						msgReplyHtml += '<tr>';
 						msgReplyHtml += '  <td class="msg_info">';
-						msgReplyHtml += '    <img src="../../images/face.jpg" width="50" height="50">';
+						msgReplyHtml += '    <img src="'+data[i].picture+'" width="50" height="50">';
 						msgReplyHtml += '    <div class="user_info">';
 						msgReplyHtml += '        <h2>'+data[i].name+'</h2>';
 						msgReplyHtml += '        <p>'+data[i].content+'</p>';
@@ -111,7 +111,7 @@ layui.config({
 					for(var i=0; i<currData.length; i++){
 						msgHtml += '<tr>';
 						msgHtml += '  <td class="msg_info">';
-						msgHtml += '    <img src="../../images/face.jpg" width="50" height="50">';
+						msgHtml += '    <img src="'+currData[i].picture+'" width="50" height="50">';
 						msgHtml += '    <div class="user_info">';
 						msgHtml += '        <h2>'+currData[i].name+'</h2>';
 						msgHtml += '        <p>'+currData[i].content+'</p>';

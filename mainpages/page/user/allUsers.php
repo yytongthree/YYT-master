@@ -16,7 +16,7 @@
 		die('Could not connect: ' . mysqli_error());
 	}
 	$sql = "SELECT * FROM register_info";
-	$result = mysqli_query($conn,$sql) or die("Error in query: $sql. ".mysqli_error());;
+	$result = mysqli_query($conn,$sql) or die("Error in query: $sql. ".mysqli_error());
 	if(mysqli_num_rows($result)>0){  
          //如果返回的数据集行数大于0，则开始赋值给类   
          while($row=mysqli_fetch_array($result)){

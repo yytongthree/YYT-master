@@ -13,9 +13,7 @@ layui.config({
 	//动态获最新活动
 	$.get("query.php",
 		function(data){
-			alert(data);
 			data=JSON.parse(data);
-			alert(data);
 			//加载最新活动
 			var activityHtml = '';
 			for(var i=0;i<data.length;i++){

@@ -1,5 +1,5 @@
 var areaData = address;
-var pwd;
+var pwd,picture;
 var $form;
 var form;
 var $;
@@ -25,16 +25,11 @@ layui.config({
         layui.upload({
         	url : "upload_file.php",
 			elem: '#file',
-			before: function(input){
-				var index = top.layer.msg('上传中，请稍候',{icon: 16,time:false,shade:0.8});			
-				setTimeout(function(){
-     	      		layer.close(index);
-    	    	},2000);
-			},
         	success: function(res){
-				alert(res.src);
-				userFace.src = res.src;
-				window.sessionStorage.setItem('userFace',res.src);
+				if(res.src){
+					alert("提交成功！");
+					window.location.href='userinfo.php';
+				}
 		    }
         });
 
@@ -66,13 +61,22 @@ layui.config({
                 }
             }
         })
-
-        //判断是否修改过头像，如果修改过则显示修改后的头像，否则显示默认头像
-        if(window.sessionStorage.getItem('userFace')){
-        	$("#userFace").attr("src",window.sessionStorage.getItem('userFace'));
-        }else{
-        	$("#userFace").attr("src","../../images/face.jpg");
-        }
+		
+		$.ajax({
+			url:"picture.php?action=ok",
+			type:'POST',
+			data:'picture='+picture,
+			async:true,
+			success: function(data){
+				picture=data;
+				 //判断是否修改过头像，如果修改过则显示修改后的头像，否则显示默认头像
+        		if(picture){
+        			$("#userFace").attr("src",picture);
+        		}else{
+        			$("#userFace").attr("src","../../images/face.jpg");
+        		}
+			}
+		})
 
         //提交个人资料
         form.on("submit(changeUser)",function(data){

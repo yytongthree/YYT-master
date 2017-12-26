@@ -1,5 +1,5 @@
 var areaData = address;
-var pwd;
+var pwd,picture;
 var $form;
 var form;
 var $;
@@ -25,13 +25,15 @@ layui.config({
 
 
         layui.upload({
-        	url : "../../json/userface.json",
+        	url : "upload_file.php",
+			elem: '#file',
         	success: function(res){
-        		var num = parseInt(4*Math.random());  //生成0-4的随机数
-        		//随机显示一个头像信息
-		    	userFace.src = res.data[num].src;
-		    	window.sessionStorage.setItem('userFace',res.data[num].src);
-				
+				if(res.src){
+					alert("提交成功！");
+					//刷新父页面
+	 				parent.location.reload();
+				//	window.location.href='userinfo.php';
+				}
 		    }
         });
 
@@ -63,12 +65,17 @@ layui.config({
 				}
 			}
 		})
-        //判断是否修改过头像，如果修改过则显示修改后的头像，否则显示默认头像
-        if(window.sessionStorage.getItem('userFace')){
-        	$("#userFace").attr("src",window.sessionStorage.getItem('userFace'));
-        }else{
-        	$("#userFace").attr("src","../../images/face.jpg");
-        }
+		
+        $.ajax({
+			url:"picture.php?action=ok",
+			type:'POST',
+			data:'picture='+picture,
+			async:true,
+			success: function(data){
+				picture=data;
+        		$("#userFace").attr("src",picture);
+			}
+		})
 
         //提交个人资料
 		var changeUser,data_check;
@@ -102,8 +109,8 @@ layui.config({
      	      		top.layer.close(index);
 					top.layer.msg("提交成功！");
  					layer.closeAll("iframe");
-	 				//刷新页面
-		 			location.reload();
+	 				//刷新父页面
+	 				parent.location.reload();
     	    	},2000);
 			}else{
 				var index = top.layer.msg('数据提交中，请稍候',{icon: 16,time:false,shade:0.8});

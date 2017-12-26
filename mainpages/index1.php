@@ -1,5 +1,26 @@
 <!DOCTYPE html>
-<?php session_start();?>
+<?php 
+	session_start();
+	$conn = mysqli_connect("localhost","root","wenny673","yyt_info");
+	if (!$conn)
+	{
+		die('Could not connect: ' . mysqli_error());
+	}
+	
+	$query = "SELECT picture FROM register_info WHERE name='{$_SESSION['username']}'"; 
+     //执行SQL语句  
+     $result = mysqli_query($conn,$query) or die("Error in query: $query. ".mysqli_error());  
+     //显示返回的记录集行数  
+     if(mysqli_num_rows($result)>0){  
+         //如果返回的数据集行数大于0，则开始以表格的形式显示   
+         while($row=mysqli_fetch_row($result)){ 
+		 	 $picture=$row[0];  
+         }    
+     }  
+     //释放记录集所占用的内存  
+	mysqli_free_result($result);  
+	mysqli_close($conn);
+?>
 <html>
 <head>
 	<meta charset="utf-8">
@@ -100,8 +121,8 @@
 						<a href="javascript:;"><i class="iconfont icon-lock1"></i><cite>锁屏</cite></a>
 					</li>
 					<li class="layui-nav-item" pc>
-						<a href="javascript:;">
-							<img src="images/face.jpg" class="layui-circle" width="35" height="35">
+                    	<a href="javascript:;">
+							<img src="<?php echo $picture;?>" class="layui-circle" width="35" height="35">
 							<cite><?php echo $_SESSION['username'];?></cite>
 						</a>
 						<dl class="layui-nav-child">
@@ -117,7 +138,7 @@
 		<!-- 左侧导航 -->
 		<div class="layui-side layui-bg-black">
 			<div class="user-photo">
-				<a class="img" title="我的头像" ><img src="images/face.jpg"></a>
+				<a class="img" title="我的头像" ><img src="<?php echo $picture;?>"></a>
 				<p>你好！<span class="userName"><?php echo $_SESSION['username'];?></span>, 欢迎登录</p>
 			</div>
 			<div class="navBar1 layui-side-scroll"></div>

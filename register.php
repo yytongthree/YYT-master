@@ -76,7 +76,7 @@
 <?php
 					} else {
 						$password=md5($password);
-						$sql="INSERT INTO register_info (name,password,truename,sex,birthdate,age,num,email,province,city,area,authority) VALUES('{$name}','{$password}','{$truename}','{$sex}','{$birth}','{$age}','{$num}','{$email}','{$province}','{$city}','{$area}','{$authority}')";
+						$sql="INSERT INTO register_info (name,password,truename,sex,birthdate,age,num,email,province,city,area,authority,picture) VALUES('{$name}','{$password}','{$truename}','{$sex}','{$birth}','{$age}','{$num}','{$email}','{$province}','{$city}','{$area}','{$authority}','http://localhost/YYT-master/mainpages/images/face.jpg')";
    						if(mysqli_query($conn,$sql)){
 							$_SESSION['username']=$name;
 ?>
@@ -126,7 +126,7 @@
 <?php
 						}else{
 							$password=md5($password);
-							$sql="INSERT INTO register_info (name,password,truename,sex,birthdate,age,num,email,province,city,area,authority) VALUES('{$name}','{$password}','{$truename}','{$sex}','{$birth}','{$age}','{$num}','{$email}','{$province}','{$city}','{$area}','{$authority}')";
+							$sql="INSERT INTO register_info (name,password,truename,sex,birthdate,age,num,email,province,city,area,authority,picture) VALUES('{$name}','{$password}','{$truename}','{$sex}','{$birth}','{$age}','{$num}','{$email}','{$province}','{$city}','{$area}','{$authority}','http://localhost/YYT-master/mainpages/images/face.jpg')";
 							$sql2="UPDATE inha_info SET sex='$sex',age='$age',num='$num',addr='$addr',nickname='$name' WHERE name='$truename'";
    							if(mysqli_query($conn,$sql)&&mysqli_query($conn,$sql2)){
 								$_SESSION['username']=$name;
@@ -177,7 +177,7 @@
 <?php
 						}else{
 							$password=md5($password);
-							$sql="INSERT INTO register_info (name,password,truename,sex,birthdate,age,num,email,province,city,area,authority) VALUES('{$name}','{$password}','{$truename}','{$sex}','{$birth}','{$age}','{$num}','{$email}','{$province}','{$city}','{$area}','{$authority}')";
+							$sql="INSERT INTO register_info (name,password,truename,sex,birthdate,age,num,email,province,city,area,authority,picture) VALUES('{$name}','{$password}','{$truename}','{$sex}','{$birth}','{$age}','{$num}','{$email}','{$province}','{$city}','{$area}','{$authority}','http://localhost/YYT-master/mainpages/images/face.jpg')";
 							$sql2="UPDATE docter_info SET sex='$sex',age='$age',num='$num',nickname='$name' WHERE name='$truename'";
    							if(mysqli_query($conn,$sql)&&mysqli_query($conn,$sql2)){
 						 		$_SESSION['username']=$name;

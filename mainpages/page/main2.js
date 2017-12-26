@@ -13,9 +13,7 @@ layui.config({
 	//动态获取文章总数和待审核文章数量,最新文章
 	$.get("query_news.php",
 		function(data){
-			alert(data);
 			data=JSON.parse(data);
-			alert(data);
 			$(".allNews span").text(data.length);  //文章总数
 			//加载最新文章
 			var hotNewsHtml = '';
@@ -34,9 +32,7 @@ layui.config({
 	//动态获最新活动
 	$.get("query.php",
 		function(data){
-			alert(data);
 			data=JSON.parse(data);
-			alert(data);
 			//加载最新活动
 			var activityHtml = '';
 			for(var i=0;i<data.length;i++){

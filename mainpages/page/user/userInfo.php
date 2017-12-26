@@ -179,7 +179,7 @@
 		</div>
 		<div class="user_right">
 			<input type="file" name="file" id="file" class="layui-upload-file" lay-title="掐指一算，我要换一个头像了">
-			<p>由于是纯静态页面，所以只能显示一张随机的图片</p>
+            <br><br>
 			<img src="" class="layui-circle" id="userFace">
             <?php
 				if($question1==''&&$question2==''&&$question3==''){
@@ -202,6 +202,6 @@
 	</form>
 	<script type="text/javascript" src="../../layui/layui.js"></script>
 	<script type="text/javascript" src="address.js"></script>
-	<script type="text/javascript" src="user1.js"></script>
+	<script type="text/javascript" src="user.js"></script>
 </body>
 </html>
