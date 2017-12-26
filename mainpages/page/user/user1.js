@@ -23,17 +23,16 @@ layui.config({
 	})
 
         layui.upload({
-        	url : "../../json/userface.json",
+        	url : "upload_file.php",
 			elem: '#dddd',
 			before: function(input){
-				var index = top.layer.msg('上传中，请稍候',{icon: 16,time:false,shade:0.8});
-			
+				var index = top.layer.msg('上传中，请稍候',{icon: 16,time:false,shade:0.8});			
 				setTimeout(function(){
      	      		layer.close(index);
-					layer.msg("上传成功！");
-    	    	},2000);
+    	    	},500);
 			},
         	success: function(res){
+				alert(res.url);
         		var num = parseInt(4*Math.random());  //生成0-4的随机数
         		//随机显示一个头像信息
 		    	userFace.src = res.data[num].src;
