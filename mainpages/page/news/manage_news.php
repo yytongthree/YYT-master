@@ -15,6 +15,7 @@
     <div class="layui-form-item">
 	</div>
 	  	<table class="layui-table">
+        <tr><a href="newsAdd.html" class="layui-btn layui-btn-mini news_edit"><i class="iconfont icon-edit"></i> 添加文章</a></tr>
 		    <colgroup>
             	<col width="5%">
                 <col width="15%">
@@ -55,10 +56,11 @@
 ?>
 <td>
 					<button class="layui-btn layui-btn-mini"><i class="iconfont icon-edit"></i>删除文章</button>
-					</form>
+                     </form>
 					<a  href="delete_news.php">
 					
 		    </td>
+					
 <?php
 				echo "</tr>";
 			}
