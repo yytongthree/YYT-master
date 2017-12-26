@@ -32,14 +32,16 @@
  			</form>
 		</div>
 	</blockquote>
+    
 	<div class="layui-form users_list">
 	<table class="layui-table">
-     <form  action="userDetail.php" method="post"> 
+     
 		   <col width="50">
 				<col width="14%"><!--登录名-->
 				<col width="12%"><!--姓名-->
 				<col width="8%"><!--性别-->
 				<col width="8%"><!--年龄-->
+                <col width="12%">
 				<col width="12%"><!--用户身份-->
                 <!--<col width="6%">操作-->
 		    </colgroup>
@@ -51,6 +53,7 @@
 					<th>姓名</th>
 					<th>性别</th>
 					<th>年龄</th>
+                    <th>联系电话</th>
                     <th>用户身份</th>
                     <th>操作</th>
 				</tr> 
@@ -62,42 +65,46 @@
 	$conn=mysqli_connect("localhost","root","wenny673","yyt_info") or die("Unable to connect!");
 	function showTable($conn,$table_name){ 
 		$sql = "select * from $table_name";
+		//echo $row['num'];
 		$res = mysqli_query($conn,$sql);
 		//循环取出数据
 		if(mysqli_num_rows($res)>0){  
          //如果返回的数据集行数大于0，则开始以表格的形式显示   
 			while($row=mysqli_fetch_array($res,MYSQLI_ASSOC)){ 
+			
 				echo "<tr>";
 ?>
+ <form  action="userDetail.php" method="post">
 <td><input type="checkbox" name="checkbox" value="<?php echo $row['ID'];?>" lay-skin="primary" ></td>
 <?php
 					echo "<td>".$row['name']."</td>";
 					echo "<td>".$row['truename']."</td>";
 					echo "<td>".$row['sex']."</td>";
 					echo "<td>".$row['age']."</td>";
+					echo "<td>".$row['num']."</td>";
 echo "<td>";switch($row['authority'])
 						{
 						 case"1":{
 						?>
                         <strong><input type="text" name="authority" value="<?php echo "非签约用户";?>" class="layui-disabled" lay-skin="primary" ></strong>
 						 <?php
-                         break;}
+                         }break;
 						 case"2":{
 						?>
                         <strong><input type="text" name="authority" value="<?php echo "签约用户";?>" class="layui-disabled" lay-skin="primary" ></strong>
 						 <?php
-                         break;}
+                         }break;
 						case"3":{
 						?>
                         <strong><input type="text" name="authority" value="<?php echo "医生";?>" class="layui-disabled" lay-skin="primary" ></strong>
 						 <?php
-                         break;}
+                         }break;
 						}
 					?>
-                   </td>
-
+                   </td> 
 	<a  href="userDetail.php">
-    <td><button class="layui-btn layui-btn-mini layui-btn-normal">查看详细资料</button></td>
+    <td><button class="layui-btn layui-btn-mini layui-btn-normal">查看详细资料</button></td></form>
+
 
 <?php
 				echo "</tr>";
@@ -108,7 +115,7 @@ echo "<td>";switch($row['authority'])
 	showTable($conn,"register_info");
 	mysqli_close($conn);
  ?>
- </form>
+
 </table>
 <div id="page"></div>
 	<script type="text/javascript" src="../../layui/layui.js"></script>

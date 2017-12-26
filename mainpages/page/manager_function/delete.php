@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>查看所有用户</title>
+	<title>删除用户</title>
 	<meta name="renderer" content="webkit">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -26,7 +26,7 @@
 	</blockquote>
 	<div class="layui-form users_list">
 	<table class="layui-table">
-     <form  action="deleteUser.php" method="post"> 
+ <!--    <form  action="deleteUser.php" method="post"> -->
 		   <col width="50">
 				<col width="12%"><!--登录名-->
 				<col width="10%"><!--姓名-->
@@ -54,7 +54,7 @@
 
 	</div> 
 <?php
-
+$authority=array();
 	$conn=mysqli_connect("localhost","root","wenny673","yyt_info") or die("Unable to connect!");
 	function showTable($conn,$table_name){ 
 		$sql = "select * from $table_name";
@@ -65,6 +65,7 @@
 			while($row=mysqli_fetch_array($res,MYSQLI_ASSOC)){ 
 				echo "<tr>";
 ?>
+<form  action="deleteUser.php" method="post"> 
 <td><input type="checkbox" name="checkbox" value="<?php echo $row['ID'];?>" lay-skin="primary" ></td>
 <?php
 					echo "<td>".$row['name']."</td>";
@@ -73,6 +74,7 @@
 					echo "<td>".$row['age']."</td>";
 					echo "<td>".$row['num']."</td>";
 					echo "<td>".$row['addr']."</td>";
+					
 echo "<td>";switch($row['authority'])
 						{
 						 case"1":{
@@ -93,14 +95,10 @@ echo "<td>";switch($row['authority'])
 						}
 					?>
                    </td>
-
-<!--<a  href="userDetail.php">
-	<button class="layui-btn layui-btn-mini layui-btn-normal">查看详细资料</button>
-    <a  href="updateUser.php">
-    <button class="layui-btn layui-btn-mini"><i class="iconfont icon-edit"></i>修改用户信息</button>-->
     
     <td> <button type="submit" class="layui-btn layui-btn-mini layui-btn-danger">删除用户</button>
 		    </td>
+            </form>
 
 <?php
 				echo "</tr>";
@@ -111,7 +109,7 @@ echo "<td>";switch($row['authority'])
 	showTable($conn,"register_info");
 	mysqli_close($conn);
  ?>
- </form>
+<!-- </form>-->
 </table>
 <div id="page"></div>
 	<script type="text/javascript" src="../../layui/layui.js"></script>

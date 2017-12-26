@@ -8,12 +8,9 @@ layui.config({
 
 	//加载页面数据
 	var usersData = '';
-	$.get("../../json/usersList.json", function(data){
+	$.get("search.php", function(data){
 		usersData = data;
-		if(window.sessionStorage.getItem("addUser")){
-			var addUser = window.sessionStorage.getItem("addUser");
-			usersData = JSON.parse(addUser).concat(usersData);
-		}
+		usersData = JSON.parse(usersData);
 		//执行加载数据的方法
 		usersList();
 	})
@@ -25,16 +22,13 @@ layui.config({
 			var index = layer.msg('查询中，请稍候',{icon: 16,time:false,shade:0.8});
             setTimeout(function(){
             	$.ajax({
-					url : "../../json/usersList.json",
+					url : "search.php",
 					type : "get",
 					dataType : "json",
 					success : function(data){
-						if(window.sessionStorage.getItem("addUser")){
-							var addUser = window.sessionStorage.getItem("addUser");
-							usersData = JSON.parse(addUser).concat(data);
-						}else{
+						
 							usersData = data;
-						}
+							usersData = JSON.parse(usersData);//将数组转换成对象
 						for(var i=0;i<usersData.length;i++){
 							var usersStr = usersData[i];
 							var selectStr = $(".search_input").val();
@@ -53,22 +47,30 @@ layui.config({
 		            			}
 		            		}
 		            		//用户名
-		            		if(usersStr.userName.indexOf(selectStr) > -1){
-			            		usersStr["userName"] = changeStr(usersStr.userName);
+		            		if(usersStr.name.indexOf(selectStr) > -1){
+			            		usersStr["name"] = changeStr(usersStr.userName);
 		            		}
-		            		//用户邮箱
-		            		if(usersStr.userEmail.indexOf(selectStr) > -1){
-			            		usersStr["userEmail"] = changeStr(usersStr.userEmail);
+		            		//用户电话
+		            		if(usersStr.num.indexOf(selectStr) > -1){
+			            		usersStr["num"] = changeStr(usersStr.userEmail);
 		            		}
 		            		//性别
-		            		if(usersStr.userSex.indexOf(selectStr) > -1){
-			            		usersStr["userSex"] = changeStr(usersStr.userSex);
+		            		if(usersStr.sex.indexOf(selectStr) > -1){
+			            		usersStr["sex"] = changeStr(usersStr.userSex);
 		            		}
-		            		//会员等级
-		            		if(usersStr.userGrade.indexOf(selectStr) > -1){
-			            		usersStr["userGrade"] = changeStr(usersStr.userGrade);
+		            		//年龄
+		            		if(usersStr.age.indexOf(selectStr) > -1){
+			            		usersStr["age"] = changeStr(usersStr.userGrade);
 		            		}
-		            		if(usersStr.userName.indexOf(selectStr)>-1 || usersStr.userEmail.indexOf(selectStr)>-1 || usersStr.userSex.indexOf(selectStr)>-1 || usersStr.userGrade.indexOf(selectStr)>-1){
+							//姓名
+		            		if(usersStr.truename.indexOf(selectStr) > -1){
+			            		usersStr["truename"] = changeStr(usersStr.userGrade);
+		            		}
+							//权限
+		            		if(usersStr.authority.indexOf(selectStr) > -1){
+			            		usersStr["authority"] = changeStr(usersStr.userGrade);
+		            		}
+		            		if(usersStr.name.indexOf(selectStr)>-1 || usersStr.num.indexOf(selectStr)>-1 || usersStr.sex.indexOf(selectStr)>-1 || usersStr.age.indexOf(selectStr)>-1||usersStr.truename.indexOf(selectStr)>-1 || usersStr.authority.indexOf(selectStr)>-1){
 		            			userArray.push(usersStr);
 		            		}
 		            	}
@@ -182,16 +184,13 @@ layui.config({
 				for(var i=0;i<currData.length;i++){
 					dataHtml += '<tr>'
 			    	+  '<td><input type="checkbox" name="checked" lay-skin="primary" lay-filter="choose"></td>'
-			    	+  '<td>'+currData[i].userName+'</td>'
-			    	+  '<td>'+currData[i].userEmail+'</td>'
-			    	+  '<td>'+currData[i].userSex+'</td>'
-			    	+  '<td>'+currData[i].userGrade+'</td>'
-			    	+  '<td>'+currData[i].userStatus+'</td>'
-			    	+  '<td>'+currData[i].userEndTime+'</td>'
-			    	+  '<td>'
-					+    '<a class="layui-btn layui-btn-mini users_edit"><i class="iconfont icon-edit"></i> 编辑</a>'
-					+    '<a class="layui-btn layui-btn-danger layui-btn-mini users_del" data-id="'+data[i].usersId+'"><i class="layui-icon">&#xe640;</i> 删除</a>'
-			        +  '</td>'
+			    	+  '<td>'+currData[i].name+'</td>'
+			    	+  '<td>'+currData[i].truename+'</td>'
+			    	+  '<td>'+currData[i].sex+'</td>'
+			    	+  '<td>'+currData[i].age+'</td>'
+			    	+  '<td>'+currData[i].num+'</td>'
+			    	+  '<td>'+currData[i].authority+'</td>'
+
 			    	+'</tr>';
 				}
 			}else{

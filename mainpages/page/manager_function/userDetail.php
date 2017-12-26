@@ -13,7 +13,8 @@
 	<link rel="stylesheet" href="//at.alicdn.com/t/font_tnyc012u2rlwstt9.css" media="all" />
 	<link rel="stylesheet" href="../../css/user.css" media="all" />
 </head>
-<body> 
+<body>
+<form action="userInfo.php/" method="post">  
 <?php
 	$checkbox=$_REQUEST["checkbox"];
   	$authority=$_REQUEST["authority"];
@@ -22,14 +23,16 @@
 	if (!$conn) 
 	{ 
     	die("连接错误: " . mysqli_connect_error()); 
-	} 
+	}
 
-	if($authority="非签约用户")
+	switch($authority)
 		{
+			case "非签约用户":{//层数4--
 			?>
             <table class="layui-table">
-     <form > 
+   <!--  <form > -->
 		   <col width="50">
+           		<col width="10%">
 				<col width="12%"><!--登录名-->
 				<col width="10%"><!--姓名-->
 				<col width="6%"><!--性别-->
@@ -44,6 +47,7 @@
 		  
            <thead>
 				<tr>
+                	<th>ID</th>
                     <th>登录名</th>
 					<th>姓名</th>
 					<th>性别</th>
@@ -57,17 +61,19 @@
 		    </thead>
 
 	</div> 
-     <!--</form>
-</table>-->
+
 <?php
-function showTable($conn,$table_name,$checkbox){ 
-		$sql = "select * from $table_name where ID='{$checkbox}'";
-		$res = mysqli_query($conn,$sql);
+
+		$sql = "select * from register_info where ID='{$checkbox}'";
+		$res = mysqli_query($conn,$sql);//echo $res;
 		//循环取出数据
-		if(mysqli_num_rows($res)>0){  
+		if(mysqli_num_rows($res)>0){  //层数2--
          //如果返回的数据集行数大于0，则开始以表格的形式显示   
-			while($row=mysqli_fetch_array($res,MYSQLI_ASSOC)){ 
+			while($row=mysqli_fetch_array($res,MYSQLI_ASSOC)){ //层数1--
 				echo "<tr>";
+				?>
+<td><input type="text" name="ID" value="<?php echo $row['ID'];?>" class="layui-disabled" lay-skin="primary" ></td>
+<?php
 				echo "<td>".$row['name']."</td>";
 				echo "<td>".$row['truename']."</td>";
 				echo "<td>".$row['sex']."</td>";
@@ -78,43 +84,41 @@ function showTable($conn,$table_name,$checkbox){
 				echo "<td>".$row['province']."</td>";
 				echo "<td>".$row['city']."</td>";
 				echo "</tr>";
-			}
+			}//层数--1
 		mysqli_free_result($res); 
-		}
-	}
-	showTable($conn,"register_info",$checkbox);
-		?>
-        </form>
+		mysqli_close ( $conn );
+		}//层数--2
+		break;?>
+     <!--   </form>-->
 	</table>
         <?php
-        }
-	else{
-		if($authority="签约用户")
-			{
-				?>
-            <table class="layui-table">
-     <form> 
+
+		}//层数--4
+	case "签约用户":{//层数1--
+	?>
+       <form>      
+     	<table class="layui-table">
 		   <col width="50">
 				<col width="12%"><!--登录名-->
 				<col width="10%"><!--姓名-->
 				<col width="6%"><!--性别-->
 				<col width="8%"><!--年龄-->
 				<col width="12%">
-                <col width="14%"><!--登录名-->
-				<col width="12%"><!--姓名-->
-				<col width="6%"><!--性别-->
-				<col width="6%"><!--年龄-->
-                <col width="6%"><!--性别-->
-				<col width="6%"><!--年龄-->
-                <col width="6%"><!--性别-->
-				<col width="6%"><!--年龄-->
-                <col width="6%"><!--性别-->
-				<col width="6%"><!--年龄-->
+                <col width="14%">
+				<col width="12%">
+				<col width="6%">
+				<col width="6%">
+                <col width="6%">
+				<col width="6%">
+                <col width="6%">
+				<col width="6%">
+                <col width="6%">
+				<col width="6%">
                 <!--<col width="6%">操作-->
 		    </colgroup>
 		  
            <thead>
-				<tr>
+				<tr><th>ID</th>
 					<th>姓名</th>
 					<th>性别</th>
 					<th>年龄</th>
@@ -134,17 +138,28 @@ function showTable($conn,$table_name,$checkbox){
 		    </thead>
 
 	</div> 
-     <!--</form>
-</table>-->
+
 <?php
-function showTable($conn,$table_name,$checkbox){ 
-		$sql = "select * from $table_name WHERE ID='{$checkbox}' ";
-		$res = mysqli_query($conn,$sql);
+		$sql1 = "select truename from register_info WHERE ID='{$checkbox}' ";
+		$res1 = mysqli_query($conn,$sql1);
 		//循环取出数据
-		if(mysqli_num_rows($res)>0){  
+		if(mysqli_num_rows($res1)>0){  //层数3--
          //如果返回的数据集行数大于0，则开始以表格的形式显示   
-			while($row=mysqli_fetch_array($res,MYSQLI_ASSOC)){ 
+			while($row=mysqli_fetch_array($res1,MYSQLI_ASSOC)){ //层数4--
+				$truename=$row['truename'];
+			}
+		}
+		$sql2 = "select * from inha_info WHERE name='{$truename}'";
+		$res = mysqli_query($conn,$sql2);
+		//循环取出数据
+		if(mysqli_num_rows($res)>0){  //层数3--
+         //如果返回的数据集行数大于0，则开始以表格的形式显示   
+			while($row=mysqli_fetch_array($res,MYSQLI_ASSOC)){ //层数4--
 				echo "<tr>";
+				echo "<tr>";
+				?>
+<td><input type="text" name="ID" value="<?php echo $row['inha_ID'];?>" class="layui-disabled" lay-skin="primary" ></td>
+<?php
 				echo "<td>".$row['name']."</td>";
 				echo "<td>".$row['sex']."</td>";
 				echo "<td>".$row['age']."</td>";
@@ -161,25 +176,23 @@ function showTable($conn,$table_name,$checkbox){
 				echo "<td>".$row['INPR']."</td>";
 				echo "<td>".$row['hear']."</td>";
 							echo "</tr>";
-			}
-		mysqli_free_result($res); 
-		}
-	}
+			}//层数--4
+		mysqli_free_result($res);
+		mysqli_close ( $conn ); 
+		}//层数--3
 	showTable($conn,"inha_info",$checkbox);
 	?>
-        </form>
+       </form>
 	</table>
         <?php
-	}
-	else{
-		if($authority="医生")
-			{
-				
-				?>
+	}//层数--1
+	break;
+	case "医生":{//层数1--
+			?>
             <table class="layui-table">
      <form> 
 		   <col width="50">
-				<col width="12%"><!--登录名-->
+				<col width="10%"><!--登录名-->
 				<col width="10%"><!--姓名-->
 				<col width="6%"><!--性别-->
 				<col width="8%"><!--年龄-->
@@ -192,6 +205,7 @@ function showTable($conn,$table_name,$checkbox){
 		  
            <thead>
 				<tr>
+                	<th>ID</th>
 					<th>姓名</th>
 					<th>性别</th>
 					<th>年龄</th>
@@ -207,14 +221,25 @@ function showTable($conn,$table_name,$checkbox){
     <!-- </form>
 </table>-->
 <?php
-function showTable($conn,$table_name,$checkbox){ 
-		$sql = "select * from $table_name WHERE ID='{$checkbox}' ";
-		$res = mysqli_query($conn,$sql);
+		$sql1 = "select truename from register_info WHERE ID='{$checkbox}' ";
+		$res1 = mysqli_query($conn,$sql1);
 		//循环取出数据
-		if(mysqli_num_rows($res)>0){  
+		if(mysqli_num_rows($res1)>0){  //层数3--
          //如果返回的数据集行数大于0，则开始以表格的形式显示   
-			while($row=mysqli_fetch_array($res,MYSQLI_ASSOC)){ 
+			while($row=mysqli_fetch_array($res1,MYSQLI_ASSOC)){ //层数4--
+				$truename=$row['truename'];
+			}
+		}
+		$sql2 = "select * from docter_info WHERE name='{$truename}'";
+		$res = mysqli_query($conn,$sql2);
+		//循环取出数据
+		if(mysqli_num_rows($res)>0){  //层数3--
+         //如果返回的数据集行数大于0，则开始以表格的形式显示   
+			while($row=mysqli_fetch_array($res,MYSQLI_ASSOC)){ //层数4--
 				echo "<tr>";
+				?>
+<td><input type="text" name="ID" value="<?php echo $row['doc_ID'];?>" class="layui-disabled" lay-skin="primary" ></td>
+<?php
 				echo "<td>".$row['name']."</td>";
 				echo "<td>".$row['sex']."</td>";
 				echo "<td>".$row['age']."</td>";
@@ -224,25 +249,26 @@ function showTable($conn,$table_name,$checkbox){
 				echo "<td>".$row['RA']."</td>";
 				echo "<td>".$row['SN']."</td>";
 							echo "</tr>";
-			}
-		mysqli_free_result($res); 
-		}
-	}
-	showTable($conn,"docter_info",$checkbox);
-	
+			}//层数--4
+		mysqli_free_result($res);
+		mysqli_close ( $conn ); 
+		}//层数--3
+		mysqli_close($conn);
+		}//层数--2
+		break;
 	?>
         </form>
 	</table>
         <?php
-	}
-	}
-	}
-	mysqli_close($conn);
+        }//层数--1
+	
+	
+	
 ?>
  <div class="layui-form-item"></div>
  <div class="layui-input-block"></div>
- <p><form action="userInfo.html" method="post"> 
- <td> <p align="center"><button type="submit" class="layui-btn layui-btn-big layui-btn-danger">修改该用户资料</button></p></td>
+
+ <td><p align="center"><button type="submit" class="layui-btn layui-btn-big layui-btn-danger">修改该用户资料</button></p></td>
  </form>
 </body>
 </html>
