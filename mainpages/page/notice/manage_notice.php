@@ -15,7 +15,7 @@
     <div class="layui-form-item">
 	</div>
 	  	<table class="layui-table">
-         <tr><a href="noticeAdd.html" class="layui-btn layui-btn-mini news_edit"><i class="iconfont icon-edit"></i> 添加公告</a></tr>
+         <tr><a href="noticeAdd.html"  style='font-size:20px' class="layui-btn layui-btn-mini news_edit"><i class="iconfont icon-edit"></i> 添加公告</a></tr>
 		    <colgroup>
             	<col width="5%">
                 <col width="30%">

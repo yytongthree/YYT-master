@@ -6,8 +6,22 @@ var navs3 = [{
 },{
 	"title" : "聊天室",
 	"icon" : "icon-text",
-	"href" : "page/chat/chatroom.html",
-	"spread" : false
+	"href" : "page/chat/main.php",
+	"spread" : false,
+	"children" : [
+		{
+			"title" : "聊天室",
+			"icon" : "&#xe631;",
+			"href" : "page/chat/main.php",
+			"spread" : false
+		},
+		{
+			"title" : "留言板",
+			"icon" : "&#xe631;",
+			"href" : "page/comment/commentAdd.html",
+			"spread" : false
+		}
+	]
 },{
 	"title" : "用户信息",
 	"icon" : "icon-text",
