@@ -10,11 +10,12 @@
 </head>
 <body class="childrenBody">
 	<blockquote class="layui-elem-quote title"><big><b>留言内容</b></big></blockquote>
-	<form class="layui-form" name="comment_form" method="post" action="../comment/reply_comment.html">
+	<form class="layui-form" name="comment_form" method="post" action="reply_comment.php">
     <div class="layui-form-item">
 	</div>
 	  	<table class="layui-table">
 		    <colgroup>
+                <col width="5%">
                 <col width="15%">
                 <col width="25%">
                 <col width="15%">
@@ -22,6 +23,7 @@
                  </colgroup>
             <thead>
                  <tr>
+                 <th>选择</th>
 		    <th>用户</th>
 		    <th>留言内容</th>
 		    <th>留言时间</th>
@@ -40,16 +42,17 @@
 		 	if(mysqli_num_rows($res)>0){ //mysqli_num_rows返回结果集中行的数量 
 			while($row=mysqli_fetch_array($res)){//结果集中取得一行作为关联数组，或数字数组，或二者兼有 
 				echo "<tr>";
-					echo "<td>".$row['userName']."</td>";
+?>
+<td><input type="checkbox" name="checkbox" value="<?php echo $row['ID'];?>" lay-skin="primary"></td>
+<?php
+					echo "<td>".$row['userName'].$row['ID']."</td>";
 					echo "<td>".$row['content']."</td>";
 					echo "<td>".$row['commentTime']."</td>";
 ?>
 			<td>
             
-			<button class="layui-btn layui-btn-mini"><i class="iconfont icon-edit"></i>回复留言</button>
-            </form>
-			<a  href="dispose_comment.php">
-					
+			<button type="submit" class="layui-btn layui-btn-mini"><i class="iconfont icon-edit"></i>回复留言</button>
+            </form>					
 		    </td>
 <?php
 				echo "</tr>";

@@ -1,3 +1,4 @@
+<?php session_start();?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,6 +21,11 @@
 				<textarea class="layui-textarea layui-hide" name="content" lay-verify="content" id="comment_content"></textarea>
 			</div>
 		</div>
+        	<?php
+			$ID=$_REQUEST['checkbox'];
+			setcookie("ID",$ID,time()+900);
+	?>
+
 		<div class="layui-form-item">
 			<div class="layui-input-block">
             	<button class="layui-btn" lay-submit="" lay-filter="addComment">立即提交</button>			
