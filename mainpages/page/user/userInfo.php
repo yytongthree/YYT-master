@@ -178,7 +178,7 @@
 			</div>
 		</div>
 		<div class="user_right">
-			<input type="file" name="dddd" id="dddd" class="layui-upload-file" lay-title="掐指一算，我要换一个头像了">
+			<input type="file" name="file" id="file" class="layui-upload-file" lay-title="掐指一算，我要换一个头像了">
 			<p>由于是纯静态页面，所以只能显示一张随机的图片</p>
 			<img src="" class="layui-circle" id="userFace">
             <?php
