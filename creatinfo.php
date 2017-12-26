@@ -52,7 +52,8 @@
 	
 	$sql = "CREATE TABLE docter_info 
 	(
-		doc_ID int(11) unsigned NOT NULL primary key,
+		ID int(11) unsigned NOT NULL AUTO_INCREMENT primary key,
+		doc_ID int(11) unsigned NOT NULL,
 		name varchar(50) not null,
 		sex varchar(10) not null,
 		age int not null,
@@ -73,7 +74,8 @@
 	
 	$sql = "CREATE TABLE inha_info 
 	(
-		inha_ID int(11) unsigned NOT NULL primary key,
+		ID int(11) unsigned NOT NULL AUTO_INCREMENT primary key,
+		inha_ID int(11) unsigned NOT NULL,
 		name varchar(50) not null,
 		sex varchar(10) not null,
 		age int not null,

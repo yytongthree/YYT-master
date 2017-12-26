@@ -26,13 +26,41 @@ var navs2 = [{
 },{
 	"title" : "聊天室",
 	"icon" : "icon-text",
-	"href" : "page/chat/chatroom.html",
-	"spread" : false
+	"href" : "page/chat/main.php",
+	"spread" : false,
+	"children" : [
+		{
+			"title" : "聊天室",
+			"icon" : "&#xe631;",
+			"href" : "page/chat/main.php",
+			"spread" : false
+		},
+		{
+			"title" : "留言板",
+			"icon" : "&#xe631;",
+			"href" : "page/comment/commentAdd.html",
+			"spread" : false
+		}
+	]
 },{
-	"title" : "文章列表",
+	"title" : "相关咨询",
 	"icon" : "icon-text",
-	"href" : "page/news/newsList.html",
-	"spread" : false
+	"href" : "page/chat/main.php",
+	"spread" : false,
+	"children" : [
+		{
+			"title" : "文章列表",
+			"icon" : "icon-text",
+			"href" : "page/news/query_news.php",
+			"spread" : false
+		},
+		{
+			"title" : "查看公告",
+			"icon" : "icon-text",
+			"href" : "page/notice/query_noticec.php",
+			"spread" : false
+		}
+	]
 },{
 	"title" : "签约医生",
 	"icon" : "icon-text",

@@ -51,7 +51,7 @@
 			case "4":{ 
   ?> 
   				<script type="text/javascript"> 
-				window.location.href="index4.php";
+				window.location.href="../mainpages/index4.php";
   				</script> 
   <?php 
   			break;

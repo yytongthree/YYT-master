@@ -1,7 +1,8 @@
-<?php
-	session_start(); 
-	$content=$_REQUEST["content"];
-	$ID=$_COOKIE['ID'];
+﻿<?php
+	$name=$_REQUEST["medicineName"];
+	$time=$_REQUEST["medicineTime"];
+	$amount=$_REQUEST["medicineamount"];
+	$notes=$_REQUEST["notes"];
 	
 	$conn=mysqli_connect("localhost","root","wenny673","yyt_info"); 
 	// 检查连接 
@@ -9,13 +10,12 @@
 	{ 
     	die("连接错误: " . mysqli_connect_error()); 
 	}
-	$sql = "UPDATE comment SET status=2,manageContent='$content' WHERE ID='{$ID}'"; 
+	$sql = "UPDATE medicine SET count='$amount',mnTime='$time' WHERE MN='$name'"; 
    	if(mysqli_query($conn,$sql)){
-		setcookie("ID",1,time()-3600);
 ?>
 		<script type="text/javascript"> 
-    		alert("留言回复成功"); 
-    		window.location.href="manage_comment.php"; 
+    		alert("修改成功"); 
+    		window.location.href="add_medicine.html"; 
  		</script>
 <?php
 	} else {

@@ -64,27 +64,64 @@ layui.config({
             layer.msg("请输入回复信息");
         }
     })
-	
-	function usersList(){
-		//渲染数据
-			function renderDate(data,curr){
-				var msgReplyHtml = '';
-				currData = chatData.concat().splice(curr*nums-nums, nums);
-				if(currData.length != 0){
-					for(var i=0; i<currData.length; i++){
+	//查看历史记录
+    $("body").on("click",".history",function(){
+        var index = layui.layer.open({
+            title : "聊天室历史记录",
+            type : 2,
+            content : "history.html",
+            success : function(layero, index){
+                layui.layer.tips('点击此处返回消息列表', '.layui-layer-setwin .layui-layer-close', {
+                    tips: 3
+                });
+                var body = layui.layer.getChildFrame('body', index);
+                //加载回复信息
+                $.get("chatroom.php",function(data){
+					data = JSON.parse(data)
+                    var msgReplyHtml = '';
+					for(var i=0; i<data.length; i++){
 						msgReplyHtml += '<tr>';
 						msgReplyHtml += '  <td class="msg_info">';
 						msgReplyHtml += '    <img src="../../images/face.jpg" width="50" height="50">';
 						msgReplyHtml += '    <div class="user_info">';
-						msgReplyHtml += '        <h2>'+currData[i].name+'</h2>';
-						msgReplyHtml += '        <p>'+currData[i].content+'</p>';
+						msgReplyHtml += '        <h2>'+data[i].name+'</h2>';
+						msgReplyHtml += '        <p>'+data[i].content+'</p>';
 						msgReplyHtml += '    </div>';
 						msgReplyHtml += '  </td>';
-						msgReplyHtml += '  <td class="msg_time">'+currData[i].saytime+'</td>';
+						msgReplyHtml += '  <td class="msg_time">'+data[i].saytime+'</td>';
 						msgReplyHtml += '</tr>';
+                  	}
+                    body.find(".msgReplyHtml").html(msgReplyHtml);
+                })
+            }	
+        })
+        //改变窗口大小时，重置弹窗的高度，防止超出可视区域（如F12调出debug的操作）
+        $(window).resize(function(){
+            layui.layer.full(index);
+        })
+        layui.layer.full(index);
+    })
+		
+	function usersList(){
+		//渲染数据
+			function renderDate(data,curr){
+				var msgHtml = '';
+				currData = chatData.concat().splice(curr*nums-nums, nums);
+				if(currData.length != 0){
+					for(var i=0; i<currData.length; i++){
+						msgHtml += '<tr>';
+						msgHtml += '  <td class="msg_info">';
+						msgHtml += '    <img src="../../images/face.jpg" width="50" height="50">';
+						msgHtml += '    <div class="user_info">';
+						msgHtml += '        <h2>'+currData[i].name+'</h2>';
+						msgHtml += '        <p>'+currData[i].content+'</p>';
+						msgHtml += '    </div>';
+						msgHtml += '  </td>';
+						msgHtml += '  <td class="msg_time">'+currData[i].saytime+'</td>';
+						msgHtml += '</tr>';
 					}
 				}
-				return msgReplyHtml;
+				return msgHtml;
 			}
 			//分页
 			var nums = 3; //每页出现的数据量
@@ -97,7 +134,7 @@ layui.config({
 					if(!first){
 						layer.msg('第'+obj.curr+'页');
 					}
-					$(".msgReplyHtml").html(renderDate(chatData,obj.curr));
+					$(".msgHtml").html(renderDate(chatData,obj.curr));
 					$('.users_list thead input[type="checkbox"]').prop("checked",false);
 					form.render();
 				}//Math.ceil()执行向上舍入，即它总是将数值向上舍入为最接近的整数；

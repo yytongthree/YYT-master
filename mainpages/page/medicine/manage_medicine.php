@@ -10,26 +10,24 @@
 </head>
 
 <body>
-	<blockquote class="layui-elem-quote title"><big><b>公告信息</b></big></blockquote>
- <form class="layui-form" name="comment_form" method="post" action="delete_notice.php">
-    <div class="layui-form-item">
-	</div>
+	<blockquote class="layui-elem-quote title"><big><b>药房库存管理</b></big></blockquote>
+    <form class="layui-form" name="medicine_form" method="post" action="../medicine/add_medicine.html">
+	<div class="layui-form">
 	  	<table class="layui-table">
-         <tr><a href="noticeAdd.html"  style='font-size:20px' class="layui-btn layui-btn-mini news_edit"><i class="iconfont icon-edit"></i> 添加公告</a></tr>
 		    <colgroup>
-            	<col width="5%">
-                <col width="30%">
-                <col width="35%">
-                <col width="15%">
-                <col width="15%">
+                <col width="5%">
+                <col width="10%">
+                <col width="10%">
+                <col width="10%">
+                <col width="10%">
                  </colgroup>
             <thead>
                  <tr>
-            <th>选择</th>
-		    <th>公告标题</th>
-		    <th>公告摘要</th>
-            <th>发布时间</th>
-            <th>查看公告详情</th>
+                 	<th>选择</th>
+					<th>药名</th>
+                    <th>库存数量</th>
+                    <th>注意事项</th>
+                    <th>管理</th>
 				</tr> 
 		    </thead>
 		    <tbody>
@@ -47,12 +45,12 @@
 ?>
 <td><input type="checkbox" name="checkbox" value="<?php echo $row['ID'];?>" lay-skin="primary"></td>
 <?php
-					echo "<td>".$row['noticeName']."</td>";
-					echo "<td>".$row['keywords']."</td>";
-					echo "<td>".$row['noticeTime']."</td>";
+					echo "<td>".$row['MN']."</td>";
+					echo "<td>".$row['count']."</td>";
+					echo "<td>".$row['notes']."</td>";
 ?>
 <td>
-			<button class="layui-btn layui-btn-mini"><i class="iconfont icon-edit"></i>删除公告</button>
+					<button class="layui-btn layui-btn-mini"><i class="iconfont icon-edit"></i>管理药品</button>
 					</form>
 					
 		    </td>
@@ -62,12 +60,12 @@
 		mysqli_free_result($res); 
 		}
 	}
-	showTable($conn,"notice");
+	showTable($conn,"medicine");
 	mysqli_close($conn);
  ?>
             </tbody>         
 		</table>
-	<script type="text/javascript" src="../../layui/layui.js"></script>
-    <script type="text/javascript" src="noticeList.js"></script>
+    <script type="text/javascript" src="../../layui/layui.js"></script>
+	<script type="text/javascript" src="../news/newsList.js"></script>
 </body>
 </html>

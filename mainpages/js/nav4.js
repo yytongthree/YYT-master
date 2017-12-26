@@ -48,21 +48,15 @@
 	"spread" : false,
 	"children" : [
 		{
-			"title" : "发布文章",
+			"title" : "管理药品",
 			"icon" : "&#xe631;",
-			"href" : "page/news/newsAdd.html",
+			"href" : "page/medicine/manage_medicine.php",
 			"spread" : false
 		},
 		{
 			"title" : "管理文章",
 			"icon" : "&#xe631;",
 			"href" : "page/news/manage_news.php",
-			"spread" : false
-		},
-		{
-			"title" : "发布公告",
-			"icon" : "&#xe631;",
-			"href" : "page/notice/noticeAdd.html",
 			"spread" : false
 		},
 		{
