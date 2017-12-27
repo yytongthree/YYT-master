@@ -1,4 +1,5 @@
-var $,tab,skyconsWeather;
+var $,tab,skyconsWeather,pwd,value,authority;
+//var pass;
 layui.config({
 	base : "js/"
 }).use(['bodyTab','form','element','layer','jquery'],function(){
@@ -7,6 +8,18 @@ layui.config({
 		element = layui.element();
 		$ = layui.jquery;
 		tab = layui.bodyTab();
+		$.ajax({
+			url:"page/user/alert_password/pwd.php?action=ok",
+			type:'POST',
+			data:"pwd="+pwd,
+			async:false,
+			success: function(data){
+				pwd=data;
+			},
+       		error: function(){
+           		alert("获取数据错误！");
+       		}
+		})
 
 	//锁屏
 	function lockPage(){
@@ -29,20 +42,23 @@ layui.config({
 	
 	// 解锁
 	$("#unlock").on("click",function(){
-		/*var pass=10;
-			$.ajax({
-				url:"index.php?action=ok",
-				type:'POST',
-				data:'pass='+pass,
-				async:true,
-				success: function(data){
-					password=data;
-				}
-			})*/
 		if($(this).siblings(".admin-header-lock-input").val() == ''){
-			layer.msg("请输入解锁密码！");
+			layer.msg("请输入解锁密码！"+pass);
 		}else{
-			if($(this).siblings(".admin-header-lock-input").val() == "123456"){
+			value=$(this).siblings(".admin-header-lock-input").val();
+			$.ajax({
+				url:"page/user/alert_password/md5.php?action=ok",
+				type:'POST',
+				data:"value="+value,
+				async:false,
+				success: function(data){
+					value=data;
+				},
+       			error: function(){
+         		   alert("获取数据错误！");
+       			}
+			})
+			if(value == pwd){
 				window.sessionStorage.setItem("lockcms",false);
 				$(this).siblings(".admin-header-lock-input").val('');
 				layer.closeAll("page");
@@ -74,35 +90,114 @@ layui.config({
 		addTab($(this));
 		$(this).parent("li").siblings().removeClass("layui-nav-itemed");
 	})
-
+	
+	$.ajax({
+		url:"js/authority.php?action=ok",
+		type:'POST',
+		data:"authority="+authority,
+		async:false,
+		success: function(data){
+			authority=data;
+		},
+       	error: function(){
+       	   alert("获取数据错误！");
+       	}
+	})
 	//公告层
-	function showNotice(){
-		layer.open({
-	        type: 1,
-	        title: "系统公告", //不显示标题栏
-	        closeBtn: false,
-	        area: '310px',
-	        shade: 0.8,
-	        id: 'LAY_layuipro', //设定一个id，防止重复弹出
-	        btn: ['我知道了'],
-	        moveType: 1, //拖拽模式，0或者1
-	        content: '<div style="padding:15px 20px; text-align:justify; line-height: 22px; text-indent:2em;border-bottom:1px solid #e2e2e2;"><p>欢迎进入医养通系统，在这里您可以进行健康档案查询、用药查询和健康食谱查询。另外，你也可签约医生版块了解更多关于自己的签约医生的信息以及最近的身体诊断或让医生给您开电子处方。</p><p>此外，您还可以通过聊天室和别的注册用户进行交流，或者通过文章列表查阅我们推送的相关的养生文章。友情链接为与我们机构相关的网页信息。</p></div>',
-	        success: function(layero){
-				var btn = layero.find('.layui-layer-btn');
-				btn.css('text-align', 'center');
-				btn.on("click",function(){
-					window.sessionStorage.setItem("showNotice","true");
-				})
-				if($(window).width() > 432){  //如果页面宽度不足以显示顶部“系统公告”按钮，则不提示
+	switch(authority){
+		case "1":{
+			function showNotice(){
+				layer.open({
+					type: 1,
+					title: "系统公告", //不显示标题栏
+					closeBtn: false,
+					area: '310px',
+					shade: 0.8,
+					id: 'LAY_layuipro', //设定一个id，防止重复弹出
+					btn: ['我知道了'],
+					moveType: 1, //拖拽模式，0或者1
+					content: '<div style="padding:15px 20px; text-align:justify; line-height: 22px; text-indent:2em;border-bottom:1px solid #e2e2e2;"><p>欢迎进入医养通系统，在这里您可以查看有关的养生文章和社区医院的基本信息和最近的活动，还可以查看院内各个医生的资料</p><p>若您对签约医生感兴趣想了解更多，请联系155xxxxxxxx，胡云医生</p></div>',
+					success: function(layero){
+						var btn = layero.find('.layui-layer-btn');
+						btn.css('text-align', 'center');
+						btn.on("click",function(){
+							window.sessionStorage.setItem("showNotice","true");
+						})
+						if($(window).width() > 432){  //如果页面宽度不足以显示顶部“系统公告”按钮，则不提示
+							btn.on("click",function(){
+								layer.tips('系统公告躲在了这里', '#showNotice', {
+								tips: 3
+							});
+						})
+					}
+	        	}
+	    	});
+			}
+			break;
+		}
+		case "2":{
+			function showNotice(){
+				layer.open({
+				type: 1,
+				title: "系统公告", //不显示标题栏
+				closeBtn: false,
+				area: '310px',
+				shade: 0.8,
+				id: 'LAY_layuipro', //设定一个id，防止重复弹出
+				btn: ['我知道了'],
+				moveType: 1, //拖拽模式，0或者1
+				content: '<div style="padding:15px 20px; text-align:justify; line-height: 22px; text-indent:2em;border-bottom:1px solid #e2e2e2;"><p>欢迎进入医养通系统，在这里您可以进行健康档案查询、用药查询和健康食谱查询。另外，你也可签约医生版块了解更多关于自己的签约医生的信息以及最近的身体诊断或让医生给您开电子处方。</p><p>此外，您还可以通过聊天室和别的注册用户进行交流，或者通过文章列表查阅我们推送的相关的养生文章。友情链接为与我们机构相关的网页信息。</p></div>',
+				success: function(layero){
+					var btn = layero.find('.layui-layer-btn');
+					btn.css('text-align', 'center');
 					btn.on("click",function(){
-						layer.tips('系统公告躲在了这里', '#showNotice', {
-							tips: 3
-						});
+						window.sessionStorage.setItem("showNotice","true");
 					})
-				}
-	        }
-	    });
+					if($(window).width() > 432){  //如果页面宽度不足以显示顶部“系统公告”按钮，则不提示
+						btn.on("click",function(){
+							layer.tips('系统公告躲在了这里', '#showNotice', {
+								tips: 3
+							});
+						})
+					}
+	        	}
+	    	});
+			}
+			break;
+		}
+		case "3":{
+			function showNotice(){
+				layer.open({
+	        	type: 1,
+	        	title: "系统公告", //不显示标题栏
+	        	closeBtn: false,
+	        	area: '310px',
+	        	shade: 0.8,
+	        	id: 'LAY_layuipro', //设定一个id，防止重复弹出
+	        	btn: ['我知道了'],
+	        	moveType: 1, //拖拽模式，0或者1
+	        	content: '<div style="padding:15px 20px; text-align:justify; line-height: 22px; text-indent:2em;border-bottom:1px solid #e2e2e2;"><p>欢迎进入医养通系统，您可以看到和您签约的居民信息，也可以通过和他们的交流作出初步诊断并开具电子处方。</p><p>此外，您还可以通过聊天室和别的注册用户进行交流。友情链接为与我们机构相关的网页信息。</p></div>',
+	        	success: function(layero){
+					var btn = layero.find('.layui-layer-btn');
+					btn.css('text-align', 'center');
+					btn.on("click",function(){
+						window.sessionStorage.setItem("showNotice","true");
+					})
+					if($(window).width() > 432){  //如果页面宽度不足以显示顶部“系统公告”按钮，则不提示
+						btn.on("click",function(){
+							layer.tips('系统公告躲在了这里', '#showNotice', {
+								tips: 3
+							});
+						})
+					}
+	        	}
+	    	});
+			}
+			break;
+		}
 	}
+		
+		
 	//判断是否处于锁屏状态(如果关闭以后则未关闭浏览器之前不再显示)
 	if(window.sessionStorage.getItem("lockcms") != "true" && window.sessionStorage.getItem("showNotice") != "true"){
 		showNotice();
