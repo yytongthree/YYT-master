@@ -101,7 +101,7 @@ echo "<td>";switch($row['authority'])
                          }break;
 						}
 					?>
-                   </td> 
+                   </td>
 	<a  href="userDetail.php">
     <td><button class="layui-btn layui-btn-mini layui-btn-normal">查看详细资料</button></td></form>
 
