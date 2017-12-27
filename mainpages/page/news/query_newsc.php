@@ -1,4 +1,5 @@
-﻿<?php session_start();?>
+﻿<!DOCTYPE html>
+<?php session_start();?>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -6,19 +7,19 @@
 </head>
 
 <body>
-
+<table width="800px">
 <?php
-	$ID=$_REQUEST["checkbox"];
+
 	$conn=mysqli_connect("localhost","root","wenny673","yyt_info") or die("Unable to connect!");
-		$sql = "select * from news WHERE ID='{$ID}'" ;
-		$res = mysqli_query($conn,$sql) or die("Error in query: $sql. ".mysqli_error());
+	function showTable($conn,$table_name){ 
+		$sql = "select * from $table_name";
+		$res = mysqli_query($conn,$sql);
 		//循环取出数据
 		if(mysqli_num_rows($res)>0){  
          //如果返回的数据集行数大于0，则开始以表格的形式显示   
 			while($row=mysqli_fetch_array($res)){ 
 				echo "<tr>";
 ?>
-<tbody>
 <td style="text-align:center;"> 
 <?php
     echo $row['newsName'];
@@ -38,12 +39,13 @@
 
 			}
 		mysqli_free_result($res); 
-
+		}
 	}
+	showTable($conn,"news");
 	mysqli_close($conn);
  ?>
 
-     </tbody>       
-
+            </tbody>         
+		</table>
 </body>
 </html>

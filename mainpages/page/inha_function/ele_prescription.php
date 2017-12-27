@@ -70,7 +70,7 @@
   		</table>
 		<p>&nbsp;</p>
 	</div>
-	<div class="cfq" id="apDiv3">处方签</div>
+<div class="cfq" id="apDiv3">处方签</div>
 	<div id="apDiv4">
 			<table width="617" border="0">
 				<tr>
