@@ -14,7 +14,6 @@
 	<link rel="stylesheet" href="../../css/user.css" media="all" />
 </head>
 <body>
-<form action="userInfo.php/" method="post">  
 <?php
 	$checkbox=$_REQUEST["checkbox"];
   	$authority=$_REQUEST["authority"];
@@ -29,8 +28,8 @@
 		{
 			case "非签约用户":{//层数4--
 			?>
+            <form action="modifyUser.php" method="post"> 
             <table class="layui-table">
-   <!--  <form > -->
 		   <col width="50">
            		<col width="10%">
 				<col width="12%"><!--登录名-->
@@ -57,6 +56,7 @@
                     <th>E-mail</th>
                     <th>所在省份</th>
                     <th>所在城市</th>
+                    <th>用户身份</th>
 				</tr> 
 		    </thead>
 
@@ -83,20 +83,26 @@
 				echo "<td>".$row['email']."</td>";
 				echo "<td>".$row['province']."</td>";
 				echo "<td>".$row['city']."</td>";
+				echo "<td>";?>				
+                        <strong><input type="text" name="authority" value="<?php echo "非签约用户";?>" class="layui-disabled" lay-skin="primary" ></strong></td>
+						 <?php
 				echo "</tr>";
 			}//层数--1
 		mysqli_free_result($res); 
 		mysqli_close ( $conn );
 		}//层数--2
-		break;?>
-     <!--   </form>-->
+		?>
+        <div class="layui-form-item"></div>
+ <div class="layui-input-block"></div>
+ <td><p align="center"><button type="submit" class="layui-btn layui-btn-big layui-btn-danger">修改该用户资料</button></p></td>
+    </form>
 	</table>
         <?php
-
+break;
 		}//层数--4
 	case "签约用户":{//层数1--
 	?>
-       <form>      
+       <form action="modifyUser.php" method="post">     
      	<table class="layui-table">
 		   <col width="50">
 				<col width="12%"><!--登录名-->
@@ -114,7 +120,7 @@
 				<col width="6%">
                 <col width="6%">
 				<col width="6%">
-                <!--<col width="6%">操作-->
+                <col width="6%">
 		    </colgroup>
 		  
            <thead>
@@ -134,6 +140,7 @@
                     <th>视力</th>
                     <th>眼压</th>
                     <th>听力</th>
+                    <th>用户身份</th>
 				</tr> 
 		    </thead>
 
@@ -175,22 +182,29 @@
 				echo "<td>".$row['SS']."</td>";
 				echo "<td>".$row['INPR']."</td>";
 				echo "<td>".$row['hear']."</td>";
-							echo "</tr>";
+				echo "<td>";?>
+                      <strong><input type="text" name="authority" value="<?php echo "签约用户";?>" class="layui-disabled" lay-skin="primary" ></strong></td>
+						 <?php
+				echo "</tr>";
 			}//层数--4
 		mysqli_free_result($res);
 		mysqli_close ( $conn ); 
 		}//层数--3
-	showTable($conn,"inha_info",$checkbox);
 	?>
-       </form>
+       <div class="layui-form-item"></div>
+ <div class="layui-input-block"></div>
+
+ <td><p align="center"><button type="submit" class="layui-btn layui-btn-big layui-btn-danger">修改该用户资料</button></p></td>
+		</form>
 	</table>
+           
         <?php
 	}//层数--1
 	break;
 	case "医生":{//层数1--
 			?>
             <table class="layui-table">
-     <form> 
+     <form action="modifyUser.php" method="post">  
 		   <col width="50">
 				<col width="10%"><!--登录名-->
 				<col width="10%"><!--姓名-->
@@ -214,6 +228,7 @@
                     <th>获得奖项</th>
                     <th>负责区域</th>
                     <th>签约人数</th>
+                    <th>用户身份</th>
 				</tr> 
 		    </thead>
 
@@ -248,15 +263,21 @@
 				echo "<td>".$row['awards']."</td>";
 				echo "<td>".$row['RA']."</td>";
 				echo "<td>".$row['SN']."</td>";
-							echo "</tr>";
+				echo "<td>";?>
+                 <strong><input type="text" name="authority" value="<?php echo "医生";?>" class="layui-disabled" lay-skin="primary" ></strong></td>
+				<?php
+				echo "</tr>";
 			}//层数--4
 		mysqli_free_result($res);
 		mysqli_close ( $conn ); 
 		}//层数--3
 		mysqli_close($conn);
 		}//层数--2
-		break;
 	?>
+    <div class="layui-form-item"></div>
+ <div class="layui-input-block"></div>
+
+ <td><p align="center"><button type="submit" class="layui-btn layui-btn-big layui-btn-danger">修改该用户资料</button></p></td>
         </form>
 	</table>
         <?php
@@ -265,10 +286,6 @@
 	
 	
 ?>
- <div class="layui-form-item"></div>
- <div class="layui-input-block"></div>
 
- <td><p align="center"><button type="submit" class="layui-btn layui-btn-big layui-btn-danger">修改该用户资料</button></p></td>
- </form>
 </body>
 </html>

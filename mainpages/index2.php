@@ -162,13 +162,13 @@
 
 	<!-- 锁屏 -->
 	<div class="admin-header-lock" id="lock-box" style="display: none;">
-		<div class="admin-header-lock-img"><img src="images/face.jpg"/></div>
+		<div class="admin-header-lock-img"><img src="<?php echo $picture;?>"/></div>
 		<div class="admin-header-lock-name" id="lockUserName"><?php echo $_SESSION['username'];?></div>
 		<div class="input_btn">
 			<input type="password" class="admin-header-lock-input layui-input" placeholder="请输入密码解锁.." name="lockPwd" id="lockPwd" />
 			<button class="layui-btn" id="unlock">解锁</button>
 		</div>
-		<p>请输入“123456”，否则不会解锁成功哦！！！</p>
+		<p>请输入您的登录密码，否则不会解锁成功哦！！！</p>
 	</div>
 	<!-- 移动导航 -->
 	<div class="site-tree-mobile layui-hide"><i class="layui-icon">&#xe602;</i></div>

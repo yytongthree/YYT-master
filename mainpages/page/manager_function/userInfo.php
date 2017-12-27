@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<?php session_start();?>
 <html>
 <head>
 	<meta charset="utf-8">
@@ -201,7 +200,7 @@
 		</div>
 	</form>
 	<script type="text/javascript" src="../../layui/layui.js"></script>
-	<script type="text/javascript" src="address.js"></script>
-	<script type="text/javascript" src="user1.js"></script>
+	<script type="text/javascript" src="../user/address.js"></script>
+	<script type="text/javascript" src="../user/user1.js"></script>
 </body>
 </html>
