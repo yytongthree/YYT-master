@@ -31,7 +31,7 @@
 	{
 		die('Could not connect: ' . mysqli_error());
 	}
-	
+	echo $_COOKIE['username'];
 	if($_COOKIE['username']){
 		$username=$_COOKIE['username'];
 		$sql = "UPDATE register_info SET password='$newpwd' WHERE name='{$username}'";
@@ -55,7 +55,6 @@
 		if($_COOKIE['email'] && $_COOKIE['token']){
 			$email=$_COOKIE['email'];
 			$token=$_COOKIE['token'];
-			$token="c54127f2a601d197efffc968761bb711";
 			$check=array();
 			$uname=array();
 			$sql = "SELECT name,password FROM register_info WHERE email='{$email}'";
