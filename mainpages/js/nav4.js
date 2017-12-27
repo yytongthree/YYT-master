@@ -4,7 +4,7 @@
 	"href" : "page/main4.html",
 	"spread" : false
 },{
-	"title" : "聊天室",
+	"title" : "聊天中心",
 	"icon" : "icon-text",
 	"href" : "page/chat/main.php",
 	"spread" : false,
@@ -29,15 +29,15 @@
 	"spread" : false,
 	"children" : [
 		{
-			"title" : "新增人数",
+			"title" : "查看用户",
 			"icon" : "&#xe631;",
-			"href" : "page/docter_function/query_doc.php",
+			"href" : "page/manager_function/allUsers.php",
 			"spread" : false
 		},
 		{
-			"title" : "用户总数",
+			"title" : "添加用户",
 			"icon" : "&#xe631;",
-			"href" : "page/manager_function/query_user.php",
+			"href" : "page/manager_function/addUser.html",
 			"spread" : false
 		}
 	]
