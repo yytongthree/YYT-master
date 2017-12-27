@@ -10,7 +10,7 @@
 </head>
 <body class="childrenBody">
 	<blockquote class="layui-elem-quote title"><big><b>留言内容</b></big></blockquote>
-	<form class="layui-form" name="comment_form" method="post" action="../comment/commentAdd.html">
+	<form class="layui-form" name="comment_form" method="post" action="commentAdd.html">
     <div class="layui-form-item">
 	</div>
 	  	<table class="layui-table">

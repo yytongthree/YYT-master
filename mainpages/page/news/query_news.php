@@ -10,7 +10,6 @@
 </head>
 <body class="childrenBody">
 	<blockquote class="layui-elem-quote title"><big><b>文章信息</b></big></blockquote>
-    <form class="layui-form" name="news_form" method="post" action="query_newsc.php">
     <div class="layui-form-item">
 	</div>
 	  	<table class="layui-table">
@@ -37,15 +36,16 @@
 <?php
 
 	$conn=mysqli_connect("localhost","root","wenny673","yyt_info") or die("Unable to connect!");
-	function showTable($conn,$table_name){ 
-		$sql = "select * from $table_name";
+		$sql = "select * from news";
 		$res = mysqli_query($conn,$sql);
 		//循环取出数据
 		if(mysqli_num_rows($res)>0){  
-         //如果返回的数据集行数大于0，则开始以表格的形式显示   
+      //如果返回的数据集行数大于0，则开始以表格的形式显示
+            
 			while($row=mysqli_fetch_array($res)){ 
-				echo "<tr>";
-?>
+
+?>	
+ <form class="layui-form" name="news_form" method="post" action="query_newsc.php"><tr>
 <td><input type="checkbox" name="checkbox" value="<?php echo $row['ID'];?>" lay-skin="primary" ></td>
 <?php
 					echo "<td>".$row['newsName']."</td>";
@@ -56,15 +56,14 @@
 
 <td>
 					<button type="submit" class="layui-btn layui-btn-mini"><i class="iconfont icon-edit"></i>查看内容</button>
-                    </form>
+                    
 </td>
 <?php
-				echo "</tr>";
+				echo "</tr></form>";
 			}
 		mysqli_free_result($res); 
 		}
-	}
-	showTable($conn,"news");
+
 	mysqli_close($conn);
  ?>
             </tbody>         

@@ -9,10 +9,9 @@
 <body>
 <table width="800px">
 <?php
-
+    $ID=$_REQUEST["checkbox"];
 	$conn=mysqli_connect("localhost","root","wenny673","yyt_info") or die("Unable to connect!");
-	function showTable($conn,$table_name){ 
-		$sql = "select * from $table_name";
+		$sql = "select * from news where ID='{$ID}'";
 		$res = mysqli_query($conn,$sql);
 		//循环取出数据
 		if(mysqli_num_rows($res)>0){  
@@ -40,8 +39,7 @@
 			}
 		mysqli_free_result($res); 
 		}
-	}
-	showTable($conn,"news");
+
 	mysqli_close($conn);
  ?>
 

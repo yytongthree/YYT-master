@@ -52,7 +52,7 @@ body,td,th {
 }
 #apDiv4 {
 	position: absolute;
-	width: 660px;
+	width: 708px;
 	height: 733px;
 	z-index: 4;
 	left: 13px;
@@ -64,16 +64,16 @@ body,td,th {
 	width: 273px;
 	height: 74px;
 	z-index: 5;
-	left: 332px;
-	top: 424px;
+	left: 333px;
+	top: 518px;
 }
 #apDiv6 {
 	position: absolute;
 	width: 273px;
 	height: 85px;
 	z-index: 5;
-	left: 333px;
-	top: 536px;
+	left: 336px;
+	top: 406px;
 }
 #apDiv7 {
 	position: absolute;
