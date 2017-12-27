@@ -41,7 +41,8 @@
 		question3 text,
 		answer1 text,
 		answer2 text,
-		answer3 text
+		answer3 text,
+		time date
 	)";
 	if(mysqli_query($conn,$sql))
    {
@@ -63,7 +64,6 @@
 		RA varchar(100),
 		SN int(5),	
 		nickname varchar(50),
-		picture blob
 	)";
 	if(mysqli_query($conn,$sql))
    {
@@ -92,7 +92,6 @@
 		INPR int(10),
 		hear int(10),
 		nickname varchar(50),
-		picture blob
 	)";
 	if(mysqli_query($conn,$sql))
    {
@@ -132,35 +131,6 @@
 		echo "<br>success5";
 	} else {
 		echo "<br>Error5: " . $sql . "<br>" . mysqli_error($conn);
-	}
-	
-	$sql = "CREATE TABLE timetable 
-	(
-		username varchar(50) not null,
-		GUT time,
-		s_name varchar(50),
-		s_time time,
-		EA varchar(100),
-		ST time
-	)";
-	if(mysqli_query($conn,$sql))
-   {
-		echo "<br>success6";
-	} else {
-		echo "<br>Error6: " . $sql . "<br>" . mysqli_error($conn);
-	}
-	
-	$sql = "CREATE TABLE essay 
-	(
-		title varchar(50) not null,
-		origin varchar(50) not null,
-		content varchar(100)
-	)";
-	if(mysqli_query($conn,$sql))
-   {
-		echo "<br>success7";
-	} else {
-		echo "<br>Error7: " . $sql . "<br>" . mysqli_error($conn);
 	}
 	
 	$sql = "CREATE TABLE doc_inha 

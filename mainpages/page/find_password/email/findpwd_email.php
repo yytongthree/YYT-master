@@ -32,7 +32,6 @@
 		}else{
 			$sql2="select name,password from register_info where name ='{$username}'";
 			$result2=mysqli_query($conn,$sql2);
-			$getpasstime = time();
 			if(mysqli_num_rows($result2)>0){   
 				while($row=mysqli_fetch_array($result2)){
 					$uname=$row['name'];
@@ -76,7 +75,7 @@
 		$smtpemailto = $email; 
 		$smtpemailfrom = $smtpusermail; 
 		$emailsubject = "医养通系统 - 找回密码"; 
-		$emailbody = "亲爱的".$email."：<br/>您在".$time."提交了找回密码请求。请点击下面的链接重置密码（按钮24小时内有效）。<br/><a href='".$url."'target='_blank'>".$url."</a>"; 
+		$emailbody = "亲爱的".$email."：<br/>您在".$time."提交了找回密码请求。请点击下面的链接重置密码：<br/><a href='".$url."'target='_blank'>".$url."</a>"; 
 		
 		$mail = new MySendMail();
 	//	$mail->setServer("smtp@126.com", "XXXXX@126.com", "XXXXX"); //设置smtp服务器，普通连接方式

@@ -11,45 +11,59 @@ layui.config({
 	})
 
 	//动态获取文章总数和待审核文章数量,最新文章
-	$.get("../json/newsList.json",
+	$.get("../js/query_news.php",
 		function(data){
-			var waitNews = [];
+			data=JSON.parse(data);
 			$(".allNews span").text(data.length);  //文章总数
-			for(var i=0;i<data.length;i++){
-				var newsStr = data[i];
-				if(newsStr["newsStatus"] == "待审核"){
-					waitNews.push(newsStr);
-				}
-			}
-			$(".waitNews span").text(waitNews.length);  //待审核文章
 			//加载最新文章
 			var hotNewsHtml = '';
-			for(var i=0;i<5;i++){
+			for(var i=0;i<data.length;i++){
 				hotNewsHtml += '<tr>'
 		    	+'<td align="left">'+data[i].newsName+'</td>'
+				+'<td>'+data[i].newsAuthor+'</td>'
+				+'<td>'+data[i].newsSum+'</td>'
 		    	+'<td>'+data[i].newsTime+'</td>'
 		    	+'</tr>';
 			}
 			$(".hot_news").html(hotNewsHtml);
 		}
 	)
-
-	//图片总数
-	$.get("../json/images.json",
+	
+	//动态获最新活动
+	$.get("../js/query.php",
 		function(data){
-			$(".imgAll span").text(data.length);
+			data=JSON.parse(data);
+			//加载最新活动
+			var activityHtml = '';
+			for(var i=0;i<data.length;i++){
+				activityHtml += '<tr>'
+		    	+'<td align="left">'+data[i].name+'</td>'
+		    	+'<td>'+data[i].addtime+'</td>'
+				+'<td>'+data[i].content+'</td>'
+		    	+'</tr>';
+			}
+			$(".activity").html(activityHtml);
 		}
 	)
 
 	//用户数
-	$.get("../json/usersList.json",
+	$.get("../page/user/allUsers.php",
 		function(data){
+			data = JSON.parse(data);
 			$(".userAll span").text(data.length);
+		}
+	)
+	
+	//新增用户数
+	$.get("../page/user/newUsers.php",
+		function(data){
+			data = JSON.parse(data);
+			$(".userNew span").text(data.length);
 		}
 	)
 
 	//新消息
-	$.get("../json/message.json",
+	$.get("../json/message2.json",
 		function(data){
 			$(".newMessage span").text(data.length);
 		}
@@ -60,39 +74,5 @@ layui.config({
 	$(".panel span").each(function(){
 		$(this).html($(this).text()>9999 ? ($(this).text()/10000).toFixed(2) + "<em>万</em>" : $(this).text());	
 	})
-
-	//系统基本参数
-	if(window.sessionStorage.getItem("systemParameter")){
-		var systemParameter = JSON.parse(window.sessionStorage.getItem("systemParameter"));
-		fillParameter(systemParameter);
-	}else{
-		$.ajax({
-			url : "../json/systemParameter.json",
-			type : "get",
-			dataType : "json",
-			success : function(data){
-				fillParameter(data);
-			}
-		})
-	}
-
-	//填充数据方法
- 	function fillParameter(data){
- 		//判断字段数据是否存在
- 		function nullData(data){
- 			if(data == '' || data == "undefined"){
- 				return "未定义";
- 			}else{
- 				return data;
- 			}
- 		}
- 		$(".version").text(nullData(data.version));      //当前版本
-		$(".author").text(nullData(data.author));        //开发作者
-		$(".homePage").text(nullData(data.homePage));    //网站首页
-		$(".server").text(nullData(data.server));        //服务器环境
-		$(".dataBase").text(nullData(data.dataBase));    //数据库版本
-		$(".maxUpload").text(nullData(data.maxUpload));    //最大上传限制
-		$(".userRights").text(nullData(data.userRights));//当前用户权限
- 	}
 
 })
