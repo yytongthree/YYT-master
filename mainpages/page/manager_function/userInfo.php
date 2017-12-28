@@ -201,6 +201,6 @@
 	</form>
 	<script type="text/javascript" src="../../layui/layui.js"></script>
 	<script type="text/javascript" src="../user/address.js"></script>
-	<script type="text/javascript" src="../user/user1.js"></script>
+	<script type="text/javascript" src="../user/user.js"></script>
 </body>
 </html>

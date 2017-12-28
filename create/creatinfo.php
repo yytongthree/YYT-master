@@ -169,7 +169,8 @@
 		tabu varchar(500),
 		AR varchar(500),
 		notes varchar(500),
-		count varchar(20)
+		count varchar(20)，
+		mnTime date
 	)";
 	if(mysqli_query($conn,$sql))
    {

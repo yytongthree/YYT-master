@@ -1,14 +1,9 @@
 {
-    "cmsName": "Beauty后台管理模版",
-    "version": "1.0.0",
+    "version": "0.3",
     "author": "地三鲜",
-    "homePage": "page/index.html",
+    "homePage": "index.php",
     "server": "windows",
-    "dataBase": "8.00.2039",
+    "dataBase": "MySQL5.7.19",
     "maxUpload": "2M",
-    "userRights": "总管理员",
-    "description": "这是小仙女闲来无事做的一套基于layui的cms模版，完美页面，包含MySQL数据库",
-    "powerby": "copyright @2017 请叫我马哥",
-    "record": "京ICP备14040xxx号-1",
-    "keywords": "layui，美女，cms，模版"
+    "userRights": "总管理员"
 }

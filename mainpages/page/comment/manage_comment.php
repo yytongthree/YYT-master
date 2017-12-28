@@ -32,7 +32,7 @@
 		    </thead>
 		    <tbody>
 <?php
-
+	
 	$conn=mysqli_connect("localhost","root","wenny673","yyt_info") or die("Unable to connect!");
 	function showTable($conn,$table_name){ 
 		$sql = "select * from $table_name WHERE status=1";

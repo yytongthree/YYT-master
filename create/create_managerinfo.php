@@ -1,10 +1,4 @@
 <?php
-	$conn = mysqli_connect("localhost","root","wenny673");
-	if (!$conn)
-	{
-		die('Could not connect: ' . mysqli_error());
-	}
-	
 	$conn = mysqli_connect("localhost","root","wenny673","yyt_info");
 	if (!$conn)
 	{
